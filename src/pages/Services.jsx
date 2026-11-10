@@ -1,0 +1,217 @@
+import { Link } from 'react-router-dom'
+import { Lightbulb, Play, Search, Settings, Target, TrendingUp } from 'lucide-react'
+import { ButtonLink, Eyebrow, PageHero, SectionHead, Wrap } from '../components/ui.jsx'
+import { useLanguage } from '../i18n/language.js'
+
+const heroPhoto = 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=1600&q=85'
+
+const serviceCards = [
+  { number: '01', title: 'Event Planning', category: 'Planning', image: 'https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=900&q=85', text: 'Perencanaan strategis dan konsep kreatif yang dirancang untuk menciptakan event bermakna dan berkesan.' },
+  { number: '02', title: 'Event Production & Logistics', category: 'Production', image: 'https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?auto=format&fit=crop&w=900&q=85', text: 'Manajemen produksi end-to-end, pengadaan vendor, venue, peralatan, hingga eksekusi di lapangan.' },
+  { number: '03', title: 'Media Buying', category: 'Media', image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=900&q=85', text: 'Penempatan media yang tepat untuk memaksimalkan jangkauan dan efektivitas promosi event.' },
+  { number: '04', title: 'Digital & Social Media Amplification', category: 'Digital', image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=900&q=85', text: 'Meningkatkan awareness event melalui kampanye digital, konten kreatif, dan engagement audiens.' },
+  { number: '05', title: 'Brand Activation', category: 'Activation', image: 'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=900&q=85', text: 'Menghidupkan brand melalui pengalaman interaktif yang menarik perhatian dan menciptakan koneksi kuat dengan audiens.' },
+  { number: '06', title: 'Talent & Entertainment Management', category: 'Talent', image: 'https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=900&q=85', text: 'Menyediakan talent, MC, performer, hingga hiburan berkualitas yang sesuai dengan kebutuhan event Anda.' },
+]
+
+const approachSteps = [
+  [Search, '01', 'Discover', 'Memahami tujuan, audiens, dan kebutuhan event Anda.'],
+  [Target, '02', 'Strategize', 'Menyusun strategi event dan komunikasi yang tepat.'],
+  [Lightbulb, '03', 'Create', 'Mengembangkan konsep, visual, dan pengalaman event yang unik.'],
+  [Settings, '04', 'Produce', 'Menyiapkan produksi, logistik, vendor, dan kebutuhan teknis.'],
+  [Play, '05', 'Execute', 'Menjalankan event dengan presisi dan koordinasi profesional.'],
+  [TrendingUp, '06', 'Amplify', 'Memperluas dampak event melalui media dan kanal digital.'],
+]
+
+export default function Services() {
+  const { language } = useLanguage()
+  const isIndonesian = language === 'id'
+  const isChinese = language === 'zh'
+
+  const displayedServices = isIndonesian
+    ? serviceCards
+    : isChinese
+      ? [
+          { ...serviceCards[0], title: '活动策划', category: '策划', text: '结合创意与战略思维，为每场活动打造有意义且难忘的体验。' },
+          { ...serviceCards[1], title: '活动制作与物流', category: '制作', text: '覆盖活动全流程管理、供应商协调、场地与设备安排及现场执行。' },
+          { ...serviceCards[2], title: '媒体投放', category: '媒体', text: '精准投放媒体资源，提升活动曝光率与宣传效果。' },
+          { ...serviceCards[3], title: '数字与社交媒体推广', category: '数字', text: '通过数字营销、创意内容与受众互动提升活动影响力。' },
+          { ...serviceCards[4], title: '品牌活动', category: '活动', text: '通过互动体验让品牌与受众建立强连接，增强品牌认知。' },
+          { ...serviceCards[5], title: '艺人与娱乐管理', category: '艺人', text: '为活动提供主持人、表演者与娱乐资源，满足不同场景需求。' },
+        ]
+      : [
+          { ...serviceCards[0], text: 'Strategic planning and creative concepts designed to make every event meaningful and memorable.' },
+          { ...serviceCards[1], text: 'End-to-end production management, vendor sourcing, venue, equipment, and on-site execution.' },
+          { ...serviceCards[2], text: 'The right media placements to maximize your event promotion reach and effectiveness.' },
+          { ...serviceCards[3], text: 'Boosting event awareness through digital campaigns, creative content, and audience engagement.' },
+          { ...serviceCards[4], text: 'Bringing brands to life through engaging interactive experiences that build strong audience connections.' },
+          { ...serviceCards[5], text: 'Providing talent, MCs, performers, and quality entertainment tailored to your event needs.' },
+        ]
+
+  const displayedSteps = isIndonesian
+    ? approachSteps
+    : isChinese
+      ? [
+          [Search, '01', '发现', '了解活动目标、受众与具体需求。'],
+          [Target, '02', '规划', '制定合适的活动策略与传播方向。'],
+          [Lightbulb, '03', '创意', '打造独特概念、视觉内容和整体活动体验。'],
+          [Settings, '04', '制作', '统筹制作、物流、供应商与技术支持。'],
+          [Play, '05', '执行', '以专业协调和高标准执行确保活动顺利落地。'],
+          [TrendingUp, '06', '推广', '借助媒体与数字渠道扩大活动影响力。'],
+        ]
+      : [
+          [Search, '01', 'Discover', 'Understanding your event goals, audience, and needs.'],
+          [Target, '02', 'Strategize', 'Building the right event strategy and communication approach.'],
+          [Lightbulb, '03', 'Create', 'Developing a unique concept, visuals, and event experience.'],
+          [Settings, '04', 'Produce', 'Preparing production, logistics, vendors, and technical needs.'],
+          [Play, '05', 'Execute', 'Delivering your event with precision and professional coordination.'],
+          [TrendingUp, '06', 'Amplify', 'Extending event impact through media and digital channels.'],
+        ]
+
+  return (
+    <>
+      <PageHero
+        image={heroPhoto}
+        breadcrumb={
+          <>
+            <Link to="/">{isIndonesian ? 'Beranda' : isChinese ? '首页' : 'Home'}</Link>
+            <span aria-hidden="true">›</span>
+            {isIndonesian ? 'Layanan' : isChinese ? '服务' : 'Services'}
+          </>
+        }
+        eyebrow={isIndonesian ? 'Layanan Kami' : isChinese ? '我们的服务' : 'Our Services'}
+        title={
+          isIndonesian ? (
+            <>
+              Solusi untuk <span className="text-accent-400">setiap kebutuhan event</span>
+            </>
+          ) : isChinese ? (
+            <>
+              为每一场活动<span className="text-accent-400">提供专业解决方案</span>
+            </>
+          ) : (
+            <>
+              Solutions for <span className="text-accent-400">every event need</span>
+            </>
+          )
+        }
+        lead={
+          isIndonesian
+            ? 'Kami menyediakan layanan terintegrasi dari hulu ke hilir untuk memastikan setiap event berjalan sukses, berdampak, dan berkesan.'
+            : isChinese
+              ? '我们提供从前期策划到落地执行的全流程服务，确保每场活动都顺利、有影响力且令人难忘。'
+              : 'We provide end-to-end integrated services to make sure every event is successful, impactful, and memorable.'
+        }
+      />
+
+      {/* Service cards ------------------------------------------------- */}
+      <section className="section">
+        <Wrap>
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {displayedServices.map((service) => (
+              <article className="card card--hover group overflow-hidden" key={service.number}>
+                <div className="relative aspect-[4/3] overflow-hidden bg-ink-800">
+                  <img
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    src={service.image}
+                    alt={`${service.title} ${isIndonesian ? 'layanan' : isChinese ? '服务' : 'service'}`}
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-ink-950/70 via-ink-950/10 to-transparent" aria-hidden="true" />
+                  <span className="chip absolute left-4 top-4 bg-white/92 text-ink-900">
+                    {service.category}
+                  </span>
+                </div>
+                <div className="p-7">
+                  <span className="font-display text-sm font-bold text-brand-600">{service.number}</span>
+                  <h3 className="h3 mt-2">{service.title}</h3>
+                  <p className="mt-3 text-[15px] leading-relaxed text-muted">{service.text}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </Wrap>
+      </section>
+
+      {/* Approach ------------------------------------------------------- */}
+      <section className="section section--white">
+        <Wrap>
+          <SectionHead
+            eyebrow={isIndonesian ? 'Alur Implementasi' : isChinese ? '实施流程' : 'Implementation Flow'}
+            title={
+              isIndonesian ? (
+                <>
+                  Dari konsep <span className="text-accent-600">hingga dampak</span>
+                </>
+              ) : isChinese ? (
+                <>
+                  从创意<span className="text-accent-600">到落地</span>
+                </>
+              ) : (
+                <>
+                  From concept <span className="text-accent-600">to impact</span>
+                </>
+              )
+            }
+          />
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {displayedSteps.map(([StepIcon, number, title, description]) => (
+              <article className="card card--hover p-7" key={number}>
+                <div className="flex items-center justify-between">
+                  <div className="icon-badge">
+                    <StepIcon size={22} />
+                  </div>
+                  <span className="font-display text-sm font-bold text-muted-2">{number}</span>
+                </div>
+                <h3 className="h3 mt-6">{title}</h3>
+                <p className="mt-3 text-[15px] leading-relaxed text-muted">{description}</p>
+              </article>
+            ))}
+          </div>
+        </Wrap>
+      </section>
+
+      {/* CTA ------------------------------------------------------------ */}
+      <section className="section section--darker cta">
+        <svg className="cta-mark" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+          <path d="M32 7l6.2 18.8L57 32l-18.8 6.2L32 57l-6.2-18.8L7 32l18.8-6.2L32 7z" fill="none" stroke="currentColor" strokeWidth="1.5" />
+        </svg>
+        <Wrap>
+          <div className="max-w-3xl" data-enter>
+            <Eyebrow dark accent>
+              {isIndonesian ? 'Siap mulai?' : isChinese ? '准备好了吗？' : 'Ready to start?'}
+            </Eyebrow>
+            <h2 className="h2 mt-5">
+              {isIndonesian ? (
+                <>
+                  Ceritakan kebutuhan event <span className="text-accent-400">Anda.</span>
+                </>
+              ) : isChinese ? (
+                <>
+                  告诉我们您的<span className="text-accent-400">活动需求。</span>
+                </>
+              ) : (
+                <>
+                  Tell us about your <span className="text-accent-400">event.</span>
+                </>
+              )}
+            </h2>
+            <p className="lead lead--onDark mt-5 max-w-[560px]">
+              {isIndonesian
+                ? 'Tim kami siap membantu menemukan solusi yang tepat untuk event Anda.'
+                : isChinese
+                  ? '我们的团队将协助您找到最适合的活动解决方案。'
+                  : 'Our team is ready to help you find the right solution for your event.'}
+            </p>
+            <div className="hero__actions">
+              <ButtonLink to="/contact" variant="accent">
+                {isIndonesian ? 'Hubungi kami' : isChinese ? '联系我们' : 'Contact us'}
+                <span className="btn__icon" aria-hidden="true">→</span>
+              </ButtonLink>
+            </div>
+          </div>
+        </Wrap>
+      </section>
+    </>
+  )
+}
