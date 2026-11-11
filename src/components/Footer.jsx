@@ -23,6 +23,7 @@ export default function Footer() {
     servicesNav: isIndonesian ? 'Layanan' : isChinese ? '服务' : 'Services',
     event: isIndonesian ? 'Event' : isChinese ? '活动' : 'Event',
     contactNav: isIndonesian ? 'Kontak' : isChinese ? '联系' : 'Contact',
+    privacy: isIndonesian ? 'Kebijakan Privasi' : isChinese ? '隐私政策' : 'Privacy Policy',
     address: 'Jl. Tamblong No.46, Kb. Pisang, Kec. Sumur Bandung, Bandung, Jawa Barat',
     rights: isIndonesian ? 'Hak cipta dilindungi.' : isChinese ? '保留所有权利。' : 'All rights reserved.',
     backToTop: isIndonesian ? 'Kembali ke atas' : isChinese ? '返回顶部' : 'Back to top',
@@ -41,6 +42,7 @@ export default function Footer() {
     { label: t.servicesNav, to: '/services' },
     { label: t.event, to: '/event' },
     { label: t.contactNav, to: '/contact' },
+    { label: t.privacy, to: '/privacy' },
   ]
 
   return (
@@ -112,6 +114,9 @@ export default function Footer() {
       <Wrap className="footer-bottom">
         <p>
           © 2026 Berkah Media Gemilang. {t.rights}{' '}
+          <Link to="/privacy" className="footer-compare">
+            {t.privacy}
+          </Link>{' '}
           <Link to="/bandingkan" className="footer-compare">
             {isIndonesian ? 'Lihat perbandingan versi' : isChinese ? '查看版本对比' : 'View version comparison'}
           </Link>
