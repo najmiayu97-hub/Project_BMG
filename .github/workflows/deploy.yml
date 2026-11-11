@@ -3,24 +3,17 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [main]
-  workflow_dispatch: # bisa dijalankan manual dari tab Actions
+  workflow_dispatch: # can be run manually from the Actions tab
 
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# Satu deploy Pages dalam satu waktu; run terbaru menang.
+# Only one Pages deploy at a time; the latest run wins.
 concurrency:
   group: pages
   cancel-in-progress: true
-
-env:
-  # Base path situs. Sesuaikan dengan nama repo / lokasi serve:
-  # - repo bernama "bmg"        -> /bmg/   (github.io/bmg)
-  # - repo "Project_BMG"        -> /Project_BMG/
-  # - user site / custom domain -> /
-  BASE_PATH: /bmg/
 
 jobs:
   build:
@@ -28,6 +21,17 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Derive BASE_PATH
+        # Project sites are served from /<repo>/; user/organization sites from /.
+        # Derived from GITHUB_REPOSITORY so it works for push and manual dispatch alike.
+        run: |
+          REPO="${GITHUB_REPOSITORY#*/}"
+          if [[ "$REPO" == *.github.io ]]; then
+            echo "BASE_PATH=/" >> "$GITHUB_ENV"
+          else
+            echo "BASE_PATH=/$REPO/" >> "$GITHUB_ENV"
+          fi
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -38,23 +42,23 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Build classic archive (jika ada)
-        # Folder classic/ sengaja tidak ikut di-commit ke repo, jadi di CI
-        # langkah ini otomatis dilewati. Jika suatu saat classic/ di-commit,
-        # arsip otomatis ikut ter-build ke /bmg/classic/.
+      - name: Build classic archive (if present)
+        # The classic/ folder is intentionally not committed to this repo,
+        # so this step is skipped in CI. If classic/ is committed in the future,
+        # the archive is built automatically to the classic/ subpath.
         run: |
           if [ -d classic ]; then
             npm run build:classic
           else
-            echo "classic/ tidak ada di repo — dilewati"
+            echo "classic/ not found in this repo - skipping"
           fi
 
-      - name: Build main
+      - name: Build main site
         run: npm run build
 
-      - name: SPA fallback untuk GitHub Pages
-        # GitHub Pages menyajikan 404.html untuk path yang tidak dikenal;
-        # menyalin index.html membuat deep link (mis. /bmg/about-us) tetap jalan.
+      - name: SPA fallback for GitHub Pages
+        # GitHub Pages serves 404.html for unknown paths;
+        # copying index.html keeps deep links (e.g. /Project_BMG/about-us) working.
         run: cp dist/index.html dist/404.html
 
       - name: Setup Pages
@@ -72,6 +76,6 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - name: Deploy ke GitHub Pages
+      - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
