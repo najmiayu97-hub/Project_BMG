@@ -7,6 +7,10 @@ import Portfolio from '../pages/Portfolio.jsx'
 import Contact from '../pages/Contact.jsx'
 import Compare from '../pages/Compare.jsx'
 
+// BASE_URL is '/' locally and e.g. '/bmg/' on GitHub Pages; React Router
+// expects a basename without a trailing slash.
+const basename = import.meta.env.BASE_URL.replace(/\/+$/, '') || '/'
+
 export const router = createBrowserRouter([
   {
     path: '/',
@@ -20,4 +24,4 @@ export const router = createBrowserRouter([
       { path: 'bandingkan', element: <Compare /> },
     ],
   },
-])
+], { basename })
