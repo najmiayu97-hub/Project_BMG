@@ -7,7 +7,7 @@ import { useLanguage } from '../i18n/language.js'
 
 const heroPhoto = 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1600&q=85'
 
-const portfolioItems = [
+const eventItems = [
   { title: { id: 'Bandung Festival 2026', en: 'Bandung Festival 2026', zh: '万隆节 2026' }, category: 'public', date: { from: 19, to: 24, month: 8, year: 2026 }, place: 'Summarecon Mall Bandung', image: 'https://images.unsplash.com/photo-1459749411175-04bf5292ceea?auto=format&fit=crop&w=850&q=85' },
   { title: { id: 'Pengisi Acara Talkshow & Meet Up', en: 'Talkshow & Meet Up Guest Speaker', zh: '脱口秀与见面会嘉宾' }, category: 'mice', gathering: true, date: { month: 7, year: 2026 }, place: 'Bandung', image: 'https://images.unsplash.com/photo-1475721027785-f74eccf877e2?auto=format&fit=crop&w=850&q=85' },
   { title: { id: 'Coway Brand Activation', en: 'Coway Brand Activation', zh: 'Coway 品牌推广活动' }, category: 'brand', date: { month: 5, year: 2026 }, place: 'Summarecon Mall Bandung', image: 'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=850&q=85' },
@@ -39,14 +39,14 @@ function matchesFilter(item, filter) {
   return item.category === 'corporate'
 }
 
-export default function Portfolio() {
+export default function Event() {
   const [filter, setFilter] = useState('All Events')
   const [page, setPage] = useState(1)
   const { language } = useLanguage()
   const isIndonesian = language === 'id'
   const isChinese = language === 'zh'
 
-  const visibleItems = useMemo(() => portfolioItems.filter((item) => matchesFilter(item, filter)), [filter])
+  const visibleItems = useMemo(() => eventItems.filter((item) => matchesFilter(item, filter)), [filter])
   const pageSize = 6
   const totalPages = Math.max(1, Math.ceil(visibleItems.length / pageSize))
   const currentPage = Math.min(page, totalPages)

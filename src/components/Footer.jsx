@@ -21,7 +21,7 @@ export default function Footer() {
     home: isIndonesian ? 'Beranda' : isChinese ? '首页' : 'Home',
     about: isIndonesian ? 'Tentang Kami' : isChinese ? '关于我们' : 'About Us',
     servicesNav: isIndonesian ? 'Layanan' : isChinese ? '服务' : 'Services',
-    portfolio: isIndonesian ? 'Event' : isChinese ? '活动' : 'Event',
+    event: isIndonesian ? 'Event' : isChinese ? '活动' : 'Event',
     contactNav: isIndonesian ? 'Kontak' : isChinese ? '联系' : 'Contact',
     address: 'Jl. Tamblong No.46, Kb. Pisang, Kec. Sumur Bandung, Bandung, Jawa Barat',
     rights: isIndonesian ? 'Hak cipta dilindungi.' : isChinese ? '保留所有权利。' : 'All rights reserved.',
@@ -39,7 +39,7 @@ export default function Footer() {
     { label: t.home, to: '/' },
     { label: t.about, to: '/about-us' },
     { label: t.servicesNav, to: '/services' },
-    { label: t.portfolio, to: '/portfolio' },
+    { label: t.event, to: '/event' },
     { label: t.contactNav, to: '/contact' },
   ]
 

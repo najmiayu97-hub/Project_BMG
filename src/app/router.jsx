@@ -1,9 +1,9 @@
-import { createBrowserRouter } from 'react-router-dom'
+import { createBrowserRouter, Navigate } from 'react-router-dom'
 import MainLayout from '../layouts/MainLayout.jsx'
 import Home from '../pages/Home.jsx'
 import AboutUs from '../pages/AboutUs.jsx'
 import Services from '../pages/Services.jsx'
-import Portfolio from '../pages/Portfolio.jsx'
+import Event from '../pages/Event.jsx'
 import Contact from '../pages/Contact.jsx'
 import Compare from '../pages/Compare.jsx'
 import NotFound from '../pages/NotFound.jsx'
@@ -22,7 +22,8 @@ export const router = createBrowserRouter([
       { path: 'about-us', element: <AboutUs /> },
       { path: 'about-us/our-team', element: <OurTeam /> },
       { path: 'services', element: <Services /> },
-      { path: 'portfolio', element: <Portfolio /> },
+      { path: 'event', element: <Event /> },
+      { path: 'portfolio', element: <Navigate to="/event" replace /> },
       { path: 'contact', element: <Contact /> },
       { path: 'bandingkan', element: <Compare /> },
       { path: '*', element: <NotFound /> },

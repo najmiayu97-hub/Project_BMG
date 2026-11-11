@@ -5,7 +5,7 @@ const pages = [
   { key: 'home', label: 'Beranda', labelEn: 'Home', labelZh: '首页' },
   { key: 'about-us', label: 'Tentang Kami', labelEn: 'About Us', labelZh: '关于我们' },
   { key: 'services', label: 'Layanan', labelEn: 'Services', labelZh: '服务' },
-  { key: 'portfolio', label: 'Event', labelEn: 'Event', labelZh: '活动' },
+  { key: 'event', label: 'Event', labelEn: 'Event', labelZh: '活动' },
   { key: 'contact', label: 'Kontak', labelEn: 'Contact', labelZh: '联系' },
 ]
 
@@ -13,8 +13,10 @@ function toNewPath(key) {
   return key === 'home' ? '/' : `/${key}`
 }
 
+// The archived classic build keeps its original route names; only 'event' differs.
 function toClassicPath(key) {
-  return `/classic/#${toNewPath(key)}`
+  const classicKey = key === 'event' ? 'portfolio' : key
+  return `/classic/#${classicKey === 'home' ? '/' : `/${classicKey}`}`
 }
 
 export default function Compare() {

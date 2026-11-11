@@ -224,7 +224,7 @@ export default function HomePage() {
                   : 'Berkah Media Gemilang delivers integrated solutions in planning, production, promotion, and event execution.'}
             </p>
             <div className="hero__actions">
-              <ButtonLink to="/portfolio" variant="accent">
+              <ButtonLink to="/event" variant="accent">
                 {isIndonesian ? 'Jelajahi karya kami' : isChinese ? '查看我们的作品' : 'Explore our work'}
                 <span className="btn__icon" aria-hidden="true">→</span>
               </ButtonLink>
@@ -369,7 +369,7 @@ export default function HomePage() {
               }
               className="mb-0"
             />
-            <ButtonLink to="/portfolio" variant="outline">
+            <ButtonLink to="/event" variant="outline">
               {isIndonesian ? 'Lihat semua event' : isChinese ? '查看全部活动' : 'View all events'}
               <span className="btn__icon" aria-hidden="true">→</span>
             </ButtonLink>
@@ -382,7 +382,7 @@ export default function HomePage() {
             >
               {projects.map((project) => (
                 <Link
-                  to="/portfolio"
+                  to="/event"
                   className="group relative block aspect-[4/3] shrink-0 basis-[82%] snap-start overflow-hidden rounded-[14px] bg-ink-800 sm:basis-[42%] lg:basis-[32%]"
                   key={project.title.id}
                 >
@@ -579,7 +579,7 @@ export default function HomePage() {
                     : 'From the first brief to event day, we stay on the ground.'
               }
             />
-            <ButtonLink to="/portfolio" variant="outline" className="mt-8">
+            <ButtonLink to="/event" variant="outline" className="mt-8">
               {isIndonesian ? 'Lihat semua karya' : isChinese ? '查看全部作品' : 'See all work'}
               <span className="btn__icon" aria-hidden="true">→</span>
             </ButtonLink>

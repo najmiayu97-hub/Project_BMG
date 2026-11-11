@@ -5,7 +5,7 @@ import { useLanguage } from '../i18n/language.js'
 const links = [
   { key: 'home', to: '/', label: { id: 'Beranda', en: 'Home', zh: '首页' } },
   { key: 'services', to: '/services', label: { id: 'Layanan', en: 'Services', zh: '服务' } },
-  { key: 'portfolio', to: '/portfolio', label: { id: 'Event', en: 'Event', zh: '活动' } },
+  { key: 'event', to: '/event', label: { id: 'Event', en: 'Event', zh: '活动' } },
   { key: 'contact', to: '/contact', label: { id: 'Kontak', en: 'Contact', zh: '联系' } },
 ]
 
