@@ -20,10 +20,10 @@ export function SiteHeader() {
   const isIndonesian = language === 'id'
   const isChinese = language === 'zh'
   const labels = isIndonesian
-    ? { Home: 'Beranda', 'About Us': 'Tentang Kami', Services: 'Layanan', Portfolio: 'Portofolio', contact: 'Hubungi Kami' }
+    ? { Home: 'Beranda', 'About Us': 'Tentang Kami', Services: 'Layanan', Portfolio: 'Event', contact: 'Hubungi Kami' }
     : isChinese
-      ? { Home: '首页', 'About Us': '关于我们', Services: '服务', Portfolio: '作品集', contact: '联系我们' }
-      : { Home: 'Home', 'About Us': 'About Us', Services: 'Services', Portfolio: 'Portfolio', contact: 'Contact Us' }
+      ? { Home: '首页', 'About Us': '关于我们', Services: '服务', Portfolio: '活动', contact: '联系我们' }
+      : { Home: 'Home', 'About Us': 'About Us', Services: 'Services', Portfolio: 'Event', contact: 'Contact Us' }
 
   const navLabel = isIndonesian ? 'Navigasi utama' : isChinese ? '主导航' : 'Main navigation'
   const openLabel = isIndonesian ? 'Buka menu' : isChinese ? '打开菜单' : 'Open menu'

@@ -6,6 +6,8 @@ import Services from '../pages/Services.jsx'
 import Portfolio from '../pages/Portfolio.jsx'
 import Contact from '../pages/Contact.jsx'
 import Compare from '../pages/Compare.jsx'
+import NotFound from '../pages/NotFound.jsx'
+import OurTeam from '../pages/OurTeam.jsx'
 
 // BASE_URL is '/' locally and e.g. '/bmg/' on GitHub Pages; React Router
 // expects a basename without a trailing slash.
@@ -18,10 +20,12 @@ export const router = createBrowserRouter([
     children: [
       { index: true, element: <Home /> },
       { path: 'about-us', element: <AboutUs /> },
+      { path: 'about-us/our-team', element: <OurTeam /> },
       { path: 'services', element: <Services /> },
       { path: 'portfolio', element: <Portfolio /> },
       { path: 'contact', element: <Contact /> },
       { path: 'bandingkan', element: <Compare /> },
+      { path: '*', element: <NotFound /> },
     ],
   },
 ], { basename })

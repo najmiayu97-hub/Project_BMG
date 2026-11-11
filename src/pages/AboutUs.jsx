@@ -4,9 +4,9 @@ import AnimatedCounter from '../components/AnimatedCounter.jsx'
 import { ButtonLink, PageHero, SectionHead, Wrap } from '../components/ui.jsx'
 import { useLanguage } from '../i18n/language.js'
 
-const teamPhoto = 'https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1200&q=88'
 const activityPhoto = 'https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=1200&q=88'
 const heroPhoto = 'https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=1600&q=85'
+const teamPhoto = 'https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1200&q=88'
 
 export default function AboutUs() {
   const { language } = useLanguage()
@@ -24,18 +24,18 @@ export default function AboutUs() {
     ? [
         { Icon: Target, title: 'Misi Kami', text: 'Memberikan solusi event yang inovatif, terintegrasi, dan berdampak melalui perencanaan matang, eksekusi profesional, serta komunikasi yang efektif.' },
         { Icon: Eye, title: 'Visi Kami', text: 'Menjadi event organizer terpercaya dan berpengaruh untuk menciptakan pengalaman berkesan dan memberikan nilai lebih bagi klien dan audiens.' },
-        { Icon: Diamond, title: 'Nilai Kami', text: 'Kreativitas\nIntegritas\nKolaborasi\nKeunggulan\nBerorientasi Hasil' },
+        { Icon: Diamond, title: 'Nilai Kami', text: 'Kreativitas, Integritas, Kolaborasi, Keunggulan, dan berorientasi hasil — lima nilai yang kami pegang di setiap proyek.' },
       ]
     : isChinese
       ? [
           { Icon: Target, title: '我们的使命', text: '提供创新、整合且具影响力的活动解决方案，确保每个环节都兼顾策划、执行与传播效果。' },
           { Icon: Eye, title: '我们的愿景', text: '成为值得信赖且具有影响力的活动策划伙伴，持续打造让人难忘并为客户与受众创造价值的活动体验。' },
-          { Icon: Diamond, title: '我们的价值观', text: '创意\n诚信\n协作\n卓越\n成果导向' },
+          { Icon: Diamond, title: '我们的价值观', text: '创意、诚信、协作、卓越与成果导向 — 这是我们在每个项目中都始终坚持的五项价值。' },
         ]
       : [
           { Icon: Target, title: 'Our Mission', text: 'To deliver innovative, integrated, and impactful event solutions through thoughtful planning, professional execution, and effective communication.' },
           { Icon: Eye, title: 'Our Vision', text: 'To become a trusted and influential event organizer, creating memorable experiences and greater value for clients and audiences.' },
-          { Icon: Diamond, title: 'Our Values', text: 'Creativity\nIntegrity\nCollaboration\nExcellence\nResult Driven' },
+          { Icon: Diamond, title: 'Our Values', text: 'Creativity, integrity, collaboration, excellence, and result-driven — five values we hold in every project we run.' },
         ]
 
   return (
@@ -75,7 +75,7 @@ export default function AboutUs() {
       />
 
       {/* Who we are --------------------------------------------------- */}
-      <section className="section">
+      <section className="section section--white">
         <Wrap className="grid items-start gap-12 lg:grid-cols-2 lg:gap-20">
           <div>
             <SectionHead
@@ -115,12 +115,12 @@ export default function AboutUs() {
       </section>
 
       {/* Stats --------------------------------------------------------- */}
-      <section className="section--tight section--white border-y border-line">
-        <Wrap className="grid grid-cols-2 gap-px overflow-hidden rounded-[20px] border border-line bg-line md:grid-cols-4">
+      <section className="section--tight">
+        <Wrap className="grid grid-cols-2 overflow-hidden rounded-[12px] border border-line bg-white shadow-sm md:grid-cols-4">
           {statistics.map((stat) => (
-            <div className="flex flex-col items-center bg-white px-4 py-10 text-center" key={stat.label}>
+            <div className="flex flex-col items-center border-r border-line px-4 py-8 text-center last:border-r-0 max-md:[&:nth-child(2n)]:border-r-0" key={stat.label}>
               <stat.Icon size={20} className="text-brand-600" />
-              <strong className="stat__value mt-4">
+              <strong className="stat__value mt-3">
                 <AnimatedCounter end={stat.end} suffix={stat.suffix} />
               </strong>
               <span className="stat__label mt-2">{stat.label}</span>
@@ -135,7 +135,7 @@ export default function AboutUs() {
           <div className="media-frame aspect-[4/3] lg:order-1">
             <img
               src={teamPhoto}
-              alt={isIndonesian ? 'Tim Berkah Media Gemilang berkolaborasi di kantor' : isChinese ? 'Berkah Media Gemilang 团队在办公室协作' : 'Berkah Media Gemilang team collaborating in the office'}
+              alt={isIndonesian ? 'Tim BMG berkolaborasi dalam rapat perencanaan event' : isChinese ? 'BMG 团队在办公室协作' : 'BMG team collaborating in an event planning meeting'}
               loading="lazy"
             />
           </div>
@@ -165,8 +165,9 @@ export default function AboutUs() {
                     : 'A professional team with deep experience and dedication, ready to make sure every detail of your event runs perfectly.'
               }
             />
-            <ButtonLink href="mailto:hello@bmg.co.id?subject=Meet%20the%20BMG%20team" variant="primary" className="mt-8">
+            <ButtonLink to="/about-us/our-team" variant="primary" className="mt-8">
               {isIndonesian ? 'Kenali tim kami' : isChinese ? '认识我们的团队' : 'Meet the team'}
+              <span className="btn__icon" aria-hidden="true">→</span>
             </ButtonLink>
           </div>
         </Wrap>
@@ -200,7 +201,7 @@ export default function AboutUs() {
                   <value.Icon size={22} />
                 </div>
                 <h3 className="h3 mt-6">{value.title}</h3>
-                <p className="mt-3 whitespace-pre-line text-[15px] leading-relaxed text-muted">{value.text}</p>
+                <p className="mt-3 text-[15px] leading-relaxed text-muted">{value.text}</p>
               </article>
             ))}
           </div>

@@ -5,7 +5,7 @@ const pages = [
   { key: 'home', label: 'Beranda', labelEn: 'Home', labelZh: '首页' },
   { key: 'about-us', label: 'Tentang Kami', labelEn: 'About Us', labelZh: '关于我们' },
   { key: 'services', label: 'Layanan', labelEn: 'Services', labelZh: '服务' },
-  { key: 'portfolio', label: 'Portofolio', labelEn: 'Portfolio', labelZh: '作品集' },
+  { key: 'portfolio', label: 'Event', labelEn: 'Event', labelZh: '活动' },
   { key: 'contact', label: 'Kontak', labelEn: 'Contact', labelZh: '联系' },
 ]
 

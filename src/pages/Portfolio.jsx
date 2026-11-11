@@ -88,10 +88,10 @@ export default function Portfolio() {
           <>
             <Link to="/">{isIndonesian ? 'Beranda' : isChinese ? '首页' : 'Home'}</Link>
             <span aria-hidden="true">›</span>
-            {isIndonesian ? 'Portofolio' : isChinese ? '作品集' : 'Portfolio'}
+            {isIndonesian ? 'Event' : isChinese ? '活动' : 'Event'}
           </>
         }
-        eyebrow={isIndonesian ? 'Portofolio Kami' : isChinese ? '我们的作品' : 'Our Portfolio'}
+        eyebrow={isIndonesian ? 'Event Kami' : isChinese ? '我们的活动' : 'Our Events'}
         title={
           isIndonesian ? (
             <>
@@ -184,7 +184,7 @@ export default function Portfolio() {
 
           {/* Pagination ------------------------------------------------ */}
           {totalPages > 1 ? (
-            <nav className="mt-12 flex items-center justify-center gap-2" aria-label={isIndonesian ? 'Halaman portofolio' : isChinese ? '作品集页面' : 'Portfolio pages'}>
+            <nav className="mt-12 flex items-center justify-center gap-2" aria-label={isIndonesian ? 'Halaman event' : isChinese ? '活动页面' : 'Event pages'}>
               <button
                 type="button"
                 className="grid h-11 w-11 place-items-center rounded-[12px] bg-ink-900/5 text-ink-900 transition-colors hover:bg-ink-900/10 disabled:cursor-default disabled:opacity-40"
@@ -222,11 +222,9 @@ export default function Portfolio() {
       </section>
 
       {/* CTA ---------------------------------------------------------- */}
-      <section className="section section--dark cta">
-        <svg className="cta-mark" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
-          <path d="M32 7l6.2 18.8L57 32l-18.8 6.2L32 57l-6.2-18.8L7 32l18.8-6.2L32 7z" fill="none" stroke="currentColor" strokeWidth="1.5" />
-        </svg>
-        <Wrap>
+      <section className="relative isolate text-white py-[62px] max-[680px]:py-[42px]" style={{ '--hero-image': `url(https://images.unsplash.com/photo-1501386761578-eac5c94b800a?auto=format&fit=crop&w=2200&q=88)` }}>
+        <div className="absolute inset-0 z-0 bg-[linear-gradient(90deg,rgba(7,14,28,.83),rgba(7,14,28,.72)),var(--hero-image)] bg-center bg-cover" />
+        <Wrap className="relative z-[1]">
           <div className="max-w-3xl" data-enter>
             <Eyebrow dark accent>
               {isIndonesian ? 'Ingin hasil yang sama?' : isChinese ? '想要同样的效果？' : 'Want the same result?'}

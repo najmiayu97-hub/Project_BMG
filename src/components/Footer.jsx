@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
-import { ArrowUp, Camera, Mail, MapPin, MessageCircle, Phone } from 'lucide-react'
+import { ArrowUp, Mail, MapPin, Phone } from 'lucide-react'
+import { siInstagram, siWhatsapp } from 'simple-icons'
 import { useLanguage } from '../i18n/language.js'
 import { Logo, Wrap } from './ui.jsx'
 
@@ -20,7 +21,7 @@ export default function Footer() {
     home: isIndonesian ? 'Beranda' : isChinese ? '首页' : 'Home',
     about: isIndonesian ? 'Tentang Kami' : isChinese ? '关于我们' : 'About Us',
     servicesNav: isIndonesian ? 'Layanan' : isChinese ? '服务' : 'Services',
-    portfolio: isIndonesian ? 'Portofolio' : isChinese ? '作品集' : 'Portfolio',
+    portfolio: isIndonesian ? 'Event' : isChinese ? '活动' : 'Event',
     contactNav: isIndonesian ? 'Kontak' : isChinese ? '联系' : 'Contact',
     address: 'Jl. Tamblong No.46, Kb. Pisang, Kec. Sumur Bandung, Bandung, Jawa Barat',
     rights: isIndonesian ? 'Hak cipta dilindungi.' : isChinese ? '保留所有权利。' : 'All rights reserved.',
@@ -44,16 +45,20 @@ export default function Footer() {
 
   return (
     <footer className="bg-ink-950 text-white">
-      <Wrap className="footer-grid">
-        <div>
+      <Wrap className="footer-main">
+        <div className="footer-brand">
           <Logo light />
           <p className="footer-tagline">{t.tagline}</p>
           <div className="footer-social">
             <a href="https://www.instagram.com/" aria-label="Instagram" target="_blank" rel="noreferrer">
-              <Camera size={18} />
+              <svg role="img" viewBox="0 0 24 24" width="18" height="18" fill={`#${siInstagram.hex}`} aria-hidden="true" focusable="false">
+                <path d={siInstagram.path} />
+              </svg>
             </a>
             <a href="https://wa.me/6281234567890" aria-label="WhatsApp" target="_blank" rel="noreferrer">
-              <MessageCircle size={18} />
+              <svg role="img" viewBox="0 0 24 24" width="18" height="18" fill={`#${siWhatsapp.hex}`} aria-hidden="true" focusable="false">
+                <path d={siWhatsapp.path} />
+              </svg>
             </a>
             <a href="mailto:hello@bmg.co.id" aria-label="Email">
               <Mail size={18} />
@@ -61,45 +66,47 @@ export default function Footer() {
           </div>
         </div>
 
-        <nav aria-label={t.links}>
-          <h2 className="footer-heading">{t.links}</h2>
-          <ul className="footer-list">
-            {pageLinks.map((link) => (
-              <li key={link.label}>
-                <Link to={link.to}>{link.label}</Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
+        <div className="footer-navs">
+          <nav aria-label={t.links}>
+            <h2 className="footer-heading">{t.links}</h2>
+            <ul className="footer-list">
+              {pageLinks.map((link) => (
+                <li key={link.label}>
+                  <Link to={link.to}>{link.label}</Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
 
-        <nav aria-label={t.services}>
-          <h2 className="footer-heading">{t.services}</h2>
-          <ul className="footer-list">
-            {serviceLinks.map((label) => (
-              <li key={label}>
-                <Link to="/services">{label}</Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
-
-        <div>
-          <h2 className="footer-heading">{t.contact}</h2>
-          <ul className="footer-contact">
-            <li>
-              <MapPin size={16} />
-              <span>{t.address}</span>
-            </li>
-            <li>
-              <Phone size={16} />
-              <a href="tel:+6281234567890">+62 812-3456-7890</a>
-            </li>
-            <li>
-              <Mail size={16} />
-              <a href="mailto:hello@bmg.co.id">hello@bmg.co.id</a>
-            </li>
-          </ul>
+          <nav aria-label={t.services}>
+            <h2 className="footer-heading">{t.services}</h2>
+            <ul className="footer-list">
+              {serviceLinks.map((label) => (
+                <li key={label}>
+                  <Link to="/services">{label}</Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
         </div>
+      </Wrap>
+
+      <Wrap className="footer-contact-band">
+        <h2 className="footer-heading">{t.contact}</h2>
+        <ul className="footer-contact footer-contact--row">
+          <li>
+            <MapPin size={16} />
+            <span>{t.address}</span>
+          </li>
+          <li>
+            <Phone size={16} />
+            <a href="tel:+6281234567890">+62 812-3456-7890</a>
+          </li>
+          <li>
+            <Mail size={16} />
+            <a href="mailto:hello@bmg.co.id">hello@bmg.co.id</a>
+          </li>
+        </ul>
       </Wrap>
 
       <Wrap className="footer-bottom">

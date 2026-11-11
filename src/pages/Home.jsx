@@ -6,10 +6,12 @@ import {
   ChevronLeft,
   ChevronRight,
   Lightbulb,
+  Mic,
   PlayCircle,
   Search,
   Settings,
   Smartphone,
+  Sparkles,
   Target,
   TrendingUp,
   Users,
@@ -19,6 +21,9 @@ import {
 import AnimatedCounter from '../components/AnimatedCounter.jsx'
 import { ButtonLink, Eyebrow, SectionHead, Wrap } from '../components/ui.jsx'
 import { useLanguage } from '../i18n/language.js'
+import * as MarqueeLib from 'react-fast-marquee'
+import { Phone } from 'lucide-react'
+const Marquee = MarqueeLib.default?.default || MarqueeLib.default || MarqueeLib
 
 const images = {
   hero: 'https://images.unsplash.com/photo-1501386761578-eac5c94b800a?auto=format&fit=crop&w=2200&q=88',
@@ -37,6 +42,8 @@ const services = [
   { icon: 'tools', title: 'Event Production & Logistics', text: 'Manajemen produksi end-to-end, pengadaan vendor, venue, peralatan, hingga eksekusi di lapangan.' },
   { icon: 'sound', title: 'Media Buying', text: 'Penempatan media yang tepat untuk memaksimalkan jangkauan dan efektivitas promosi event.' },
   { icon: 'phone', title: 'Digital & Social Media Amplification', text: 'Meningkatkan awareness event melalui kampanye digital, konten kreatif, dan engagement audiens.' },
+  { icon: 'sparkles', title: 'Brand Activation', text: 'Menghidupkan brand melalui pengalaman interaktif yang menarik perhatian dan menciptakan koneksi kuat dengan audiens.' },
+  { icon: 'mic', title: 'Talent & Entertainment Management', text: 'Menyediakan talent, MC, performer, hingga hiburan berkualitas yang sesuai dengan kebutuhan event Anda.' },
 ]
 
 const projects = [
@@ -63,13 +70,26 @@ const process = [
   [TrendingUp, '06', 'Amplify', 'Memperluas dampak event melalui media dan kanal digital.'],
 ]
 
-const clients = ['JanSports', 'Coway', 'Lumi', 'Serasa Bakehouse', 'Tel-Popek']
+const clients = [
+  <span key="jansport" className="font-black tracking-[0.09em] text-[21px]">JanSport</span>,
+  <span key="coway" className="font-bold text-[26px]">coway</span>,
+  <span key="lumi" className="font-bold tracking-[0.32em] text-[19px]">LUMI</span>,
+  <span key="serasa" className="flex flex-col items-center leading-[1]">
+    <span className="font-serif italic text-[23px]">Serasa</span>
+    <small className="mt-[2px] text-[8.5px] font-semibold tracking-[0.32em] text-white/70">BAKEHOUSE</small>
+  </span>,
+  <span key="telpopek" className="flex items-center gap-[8px] text-[19px] font-bold leading-none">
+    <Phone size={22} aria-hidden="true" /> tel-popek
+  </span>,
+]
 
 const iconMap = {
   calendar: Calendar,
   tools: Wrench,
   sound: Volume2,
   phone: Smartphone,
+  sparkles: Sparkles,
+  mic: Mic,
   bulb: Lightbulb,
   play: PlayCircle,
   briefcase: Briefcase,
@@ -107,12 +127,16 @@ export default function HomePage() {
           { icon: 'tools', title: '活动制作与物流', text: '覆盖活动全流程管理、供应商协调、场地与设备安排及现场执行。' },
           { icon: 'sound', title: '媒体投放', text: '精准投放媒体资源，提升活动曝光率与宣传效果。' },
           { icon: 'phone', title: '数字与社交媒体推广', text: '通过数字营销、创意内容与受众互动提升活动影响力。' },
+          { icon: 'sparkles', title: '品牌活动', text: '通过互动体验让品牌与受众建立强连接，增强品牌认知。' },
+          { icon: 'mic', title: '艺人与娱乐管理', text: '为活动提供主持人、表演者与娱乐资源，满足不同场景需求。' },
         ]
       : [
           { icon: 'calendar', title: 'Event Planning', text: 'Strategic planning and creative concepts designed to make every event meaningful and memorable.' },
           { icon: 'tools', title: 'Event Production & Logistics', text: 'End-to-end production management, vendor sourcing, venue, equipment, and on-site execution.' },
           { icon: 'sound', title: 'Media Buying', text: 'The right media placements to maximize your event promotion reach and effectiveness.' },
           { icon: 'phone', title: 'Digital & Social Media Amplification', text: 'Boosting event awareness through digital campaigns, creative content, and audience engagement.' },
+          { icon: 'sparkles', title: 'Brand Activation', text: 'Bringing brands to life through engaging interactive experiences that build strong audience connections.' },
+          { icon: 'mic', title: 'Talent & Entertainment Management', text: 'Providing talent, MCs, performers, and quality entertainment tailored to your event needs.' },
         ]
 
   const localizedReasons = isIndonesian
@@ -263,7 +287,7 @@ export default function HomePage() {
               ))}
             </div>
           </div>
-          <div className="w-full max-w-[280px] justify-self-center sm:max-w-[340px] md:max-w-[400px] lg:max-w-[470px] lg:justify-self-end xl:max-w-[510px]">
+          <div className="w-full max-w-[220px] justify-self-center sm:max-w-[250px] md:max-w-[275px] lg:max-w-[300px] lg:justify-self-end xl:max-w-[330px]">
             <img
               className="aspect-[4/3] w-full rounded-[20px] object-cover shadow-lg"
               src={images.about}
@@ -305,17 +329,17 @@ export default function HomePage() {
             className="mb-0 max-w-2xl"
           />
 
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {localizedServices.map((service, index) => (
-              <article className="card card--dark card--hover p-7" key={service.title}>
+              <article className="card card--dark card--hover p-5" key={service.title}>
                 <div className="flex items-start justify-between">
-                  <div className="icon-badge icon-badge--dark">
-                    <Icon name={service.icon} />
+                  <div className="icon-badge icon-badge--dark icon-badge--sm">
+                    <Icon name={service.icon} size={20} />
                   </div>
-                  <span className="font-display text-sm font-bold text-white/60">{String(index + 1).padStart(2, '0')}</span>
+                  <span className="font-display text-xs font-bold text-white/55">{String(index + 1).padStart(2, '0')}</span>
                 </div>
-                <h3 className="h3 mt-6 text-white">{service.title}</h3>
-                <p className="mt-3 text-[15px] leading-relaxed text-white/62">{service.text}</p>
+                <h3 className="mt-4 text-[16px] leading-snug font-bold text-white">{service.title}</h3>
+                <p className="mt-2 text-[13px] leading-relaxed text-white/62">{service.text}</p>
               </article>
             ))}
           </div>
@@ -325,7 +349,7 @@ export default function HomePage() {
       {/* Work --------------------------------------------------------- */}
       <section className="section section--white">
         <Wrap>
-          <div className="flex flex-wrap items-end justify-between gap-8">
+          <div className="flex flex-wrap items-center justify-between gap-8">
             <SectionHead
               eyebrow={isIndonesian ? 'Karya Kami' : isChinese ? '我们的作品' : 'Our Work'}
               title={
@@ -343,15 +367,15 @@ export default function HomePage() {
                   </>
                 )
               }
-              className=""
+              className="mb-0"
             />
             <ButtonLink to="/portfolio" variant="outline">
-              {isIndonesian ? 'Lihat semua portofolio' : isChinese ? '查看全部作品' : 'View all portfolio'}
+              {isIndonesian ? 'Lihat semua event' : isChinese ? '查看全部活动' : 'View all events'}
               <span className="btn__icon" aria-hidden="true">→</span>
             </ButtonLink>
           </div>
 
-          <div className="relative">
+          <div className="relative mt-10">
             <div
               className="flex snap-x snap-mandatory gap-5 overflow-x-auto pb-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
               ref={workCarouselRef}
@@ -359,7 +383,7 @@ export default function HomePage() {
               {projects.map((project) => (
                 <Link
                   to="/portfolio"
-                  className="group relative block aspect-[16/10] shrink-0 basis-[86%] snap-start overflow-hidden rounded-[20px] bg-ink-800 sm:basis-[58%] lg:aspect-[4/3] lg:basis-[48%]"
+                  className="group relative block aspect-[4/3] shrink-0 basis-[82%] snap-start overflow-hidden rounded-[14px] bg-ink-800 sm:basis-[42%] lg:basis-[32%]"
                   key={project.title.id}
                 >
                   <img
@@ -369,9 +393,9 @@ export default function HomePage() {
                     loading="lazy"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-ink-950/95 via-ink-950/45 to-transparent" aria-hidden="true" />
-                  <div className="absolute inset-x-0 bottom-0 p-6">
-                    <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-accent-300">{project.subtitle[language]}</p>
-                    <h3 className="h3 mt-2 text-white">{project.title[language]}</h3>
+                  <div className="absolute inset-x-0 bottom-0 p-5">
+                    <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-accent-300">{project.subtitle[language]}</p>
+                    <h3 className="mt-2 text-[17px] leading-snug font-bold text-white">{project.title[language]}</h3>
                   </div>
                 </Link>
               ))}
@@ -399,17 +423,39 @@ export default function HomePage() {
       </section>
 
       {/* Clients ------------------------------------------------------ */}
-      <section className="section--tight section--white border-t border-line">
-        <Wrap>
-          <Eyebrow className="mb-8">
-            {isIndonesian ? 'Dipercaya oleh brand terkemuka' : isChinese ? '值得信赖的知名品牌' : 'Trusted by great brands'}
-          </Eyebrow>
-          <div className="clients">
-            {clients.map((client) => (
-              <div className="clients__item" key={client}>
-                {client}
-              </div>
-            ))}
+      <section className="section--tight section--dark">
+        <Wrap className="flex flex-col gap-8 md:flex-row md:items-center md:justify-between md:gap-12">
+          <div className="shrink-0">
+            <Eyebrow dark accent>
+              {isIndonesian ? 'Klien Kami' : isChinese ? '我们的客户' : 'Our Clients'}
+            </Eyebrow>
+            <h2 className="h2 mt-4 text-white">
+              {isIndonesian ? (
+                <>
+                  Dipercaya oleh <span className="text-accent-400">brand terkemuka</span>
+                </>
+              ) : isChinese ? (
+                <>
+                  值得信赖的<span className="text-accent-400">知名品牌</span>
+                </>
+              ) : (
+                <>
+                  Trusted by <span className="text-accent-400">great brands</span>
+                </>
+              )}
+            </h2>
+          </div>
+          <div className="w-full max-w-[640px] overflow-hidden" aria-label={isIndonesian ? 'Daftar klien' : isChinese ? '客户列表' : 'Client list'}>
+            <Marquee speed={42} gradient={false} pauseOnHover>
+              {clients.map((client) => (
+                <span
+                  className="mx-7 flex shrink-0 items-center text-white/55 transition-colors hover:text-white"
+                  key={client.key}
+                >
+                  {client}
+                </span>
+              ))}
+            </Marquee>
           </div>
         </Wrap>
       </section>
@@ -435,14 +481,19 @@ export default function HomePage() {
               )
             }
           />
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-5">
+          <div className="flex flex-wrap justify-center gap-6">
             {localizedReasons.map((reason) => (
-              <div className="text-center" key={reason.title}>
-                <div className="icon-badge mx-auto">
-                  <Icon name={reason.icon} />
+              <div
+                className="card flex w-full flex-col items-start gap-4 p-8 sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)]"
+                key={reason.title}
+              >
+                <div className="icon-badge">
+                  <Icon name={reason.icon} size={24} />
                 </div>
-                <h3 className="h3 mt-5">{reason.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-muted">{reason.text}</p>
+                <div>
+                  <h3 className="h3 text-[19px]">{reason.title}</h3>
+                  <p className="mt-2 text-[14px] leading-relaxed text-muted">{reason.text}</p>
+                </div>
               </div>
             ))}
           </div>
@@ -522,10 +573,10 @@ export default function HomePage() {
               }
               lead={
                 isIndonesian
-                  ? 'Setiap event yang kami kerjakan dimulai dari Brief dan berakhir di lapangan — dan kami berada di keduanya.'
+                  ? 'Dari brief pertama hingga hari-H, kami selalu hadir di lapangan.'
                   : isChinese
-                    ? '我们打造的每场活动都从brief开始，在现场结束——两端都有我们的身影。'
-                    : 'Every event we run starts with a brief and ends on the ground — and we are present at both ends.'
+                    ? '从首次 brief 到落地执行，我们都在现场。'
+                    : 'From the first brief to event day, we stay on the ground.'
               }
             />
             <ButtonLink to="/portfolio" variant="outline" className="mt-8">
@@ -535,7 +586,7 @@ export default function HomePage() {
           </div>
           <div className="relative">
             <div
-              className="flex snap-x snap-mandatory gap-4 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+              className="flex snap-x snap-mandatory gap-3 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
               ref={fieldCarouselRef}
             >
               {fieldPhotos.map((photo) => (
@@ -547,34 +598,30 @@ export default function HomePage() {
                 </div>
               ))}
             </div>
-            <div className="mt-5 flex items-center justify-end gap-2">
-              <button
-                type="button"
-                className="grid h-11 w-11 cursor-pointer place-items-center rounded-full border border-line bg-white text-ink-900 transition-colors hover:border-ink-900 hover:text-accent-600"
-                aria-label={isIndonesian ? 'Foto sebelumnya' : isChinese ? '上一张照片' : 'Previous photo'}
-                onClick={() => scrollField(-1)}
-              >
-                <ChevronLeft size={18} />
-              </button>
-              <button
-                type="button"
-                className="grid h-11 w-11 cursor-pointer place-items-center rounded-full border border-line bg-white text-ink-900 transition-colors hover:border-ink-900 hover:text-accent-600"
-                aria-label={isIndonesian ? 'Foto berikutnya' : isChinese ? '下一张照片' : 'Next photo'}
-                onClick={() => scrollField(1)}
-              >
-                <ChevronRight size={18} />
-              </button>
-            </div>
+            <button
+              type="button"
+              className="absolute left-2 top-1/2 z-[5] grid h-10 w-10 -translate-y-1/2 cursor-pointer place-items-center rounded-full bg-[rgba(11,20,44,0.6)] text-white transition-colors hover:bg-[rgba(11,20,44,0.85)]"
+              aria-label={isIndonesian ? 'Foto sebelumnya' : isChinese ? '上一张照片' : 'Previous photo'}
+              onClick={() => scrollField(-1)}
+            >
+              <ChevronLeft size={18} />
+            </button>
+            <button
+              type="button"
+              className="absolute right-2 top-1/2 z-[5] grid h-10 w-10 -translate-y-1/2 cursor-pointer place-items-center rounded-full bg-[rgba(11,20,44,0.6)] text-white transition-colors hover:bg-[rgba(11,20,44,0.85)]"
+              aria-label={isIndonesian ? 'Foto berikutnya' : isChinese ? '下一张照片' : 'Next photo'}
+              onClick={() => scrollField(1)}
+            >
+              <ChevronRight size={18} />
+            </button>
           </div>
         </Wrap>
       </section>
 
       {/* CTA ---------------------------------------------------------- */}
-      <section className="section section--darker cta">
-        <svg className="cta-mark" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
-          <path d="M32 7l6.2 18.8L57 32l-18.8 6.2L32 57l-6.2-18.8L7 32l18.8-6.2L32 7z" fill="none" stroke="currentColor" strokeWidth="1.5" />
-        </svg>
-        <Wrap>
+      <section className="relative isolate text-white py-[62px] max-[680px]:py-[42px]" style={{ '--hero-image': `url(${images.hero})` }}>
+        <div className="absolute inset-0 z-0 bg-[linear-gradient(90deg,rgba(7,14,28,.83),rgba(7,14,28,.72)),var(--hero-image)] bg-center bg-cover" />
+        <Wrap className="relative z-[1]">
           <div className="max-w-3xl" data-enter>
             <Eyebrow dark accent>
               {isIndonesian ? 'Mulai dari sebuah ide' : isChinese ? '从一个想法开始' : 'Start with an idea'}

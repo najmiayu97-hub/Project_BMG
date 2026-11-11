@@ -4,6 +4,7 @@ import { ButtonLink, Eyebrow, PageHero, SectionHead, Wrap } from '../components/
 import { useLanguage } from '../i18n/language.js'
 
 const heroPhoto = 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=1600&q=85'
+const ctaPhoto = 'https://images.unsplash.com/photo-1501386761578-eac5c94b800a?auto=format&fit=crop&w=1600&q=88'
 
 const serviceCards = [
   { number: '01', title: 'Event Planning', category: 'Planning', image: 'https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=900&q=85', text: 'Perencanaan strategis dan konsep kreatif yang dirancang untuk menciptakan event bermakna dan berkesan.' },
@@ -134,49 +135,51 @@ export default function Services() {
       </section>
 
       {/* Approach ------------------------------------------------------- */}
-      <section className="section section--white">
+      <section className="section section--dark">
         <Wrap>
           <SectionHead
+            dark
             eyebrow={isIndonesian ? 'Alur Implementasi' : isChinese ? '实施流程' : 'Implementation Flow'}
             title={
               isIndonesian ? (
                 <>
-                  Dari konsep <span className="text-accent-600">hingga dampak</span>
+                  Dari konsep <span className="text-accent-400">hingga dampak</span>
                 </>
               ) : isChinese ? (
                 <>
-                  从创意<span className="text-accent-600">到落地</span>
+                  从创意<span className="text-accent-400">到落地</span>
                 </>
               ) : (
                 <>
-                  From concept <span className="text-accent-600">to impact</span>
+                  From concept <span className="text-accent-400">to impact</span>
                 </>
               )
             }
           />
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {displayedSteps.map(([StepIcon, number, title, description]) => (
-              <article className="card card--hover p-7" key={number}>
-                <div className="flex items-center justify-between">
-                  <div className="icon-badge">
-                    <StepIcon size={22} />
+          <div className="timeline">
+            {displayedSteps.map(([StepIcon, number, title, description], index) => {
+              const side = index % 2 === 0 ? 'left' : 'right'
+              return (
+                <div className="timeline__row" key={number}>
+                  <div className="timeline__icon">
+                    <StepIcon size={18} />
                   </div>
-                  <span className="font-display text-sm font-bold text-muted-2">{number}</span>
+                  <div className={`timeline__card card card--dark p-6 sm:max-w-[430px] ${side === 'left' ? 'timeline__card--left' : 'timeline__card--right'}`}>
+                    <span className="text-xs font-bold tracking-[0.14em] text-brand-300">{number}</span>
+                    <h3 className="h3 mt-2 text-white">{title}</h3>
+                    <p className="mt-2 text-sm leading-relaxed text-white/62">{description}</p>
+                  </div>
                 </div>
-                <h3 className="h3 mt-6">{title}</h3>
-                <p className="mt-3 text-[15px] leading-relaxed text-muted">{description}</p>
-              </article>
-            ))}
+              )
+            })}
           </div>
         </Wrap>
       </section>
 
       {/* CTA ------------------------------------------------------------ */}
-      <section className="section section--darker cta">
-        <svg className="cta-mark" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
-          <path d="M32 7l6.2 18.8L57 32l-18.8 6.2L32 57l-6.2-18.8L7 32l18.8-6.2L32 7z" fill="none" stroke="currentColor" strokeWidth="1.5" />
-        </svg>
-        <Wrap>
+      <section className="relative isolate py-[62px] text-white max-[680px]:py-[42px]" style={{ '--hero-image': `url(${ctaPhoto})` }}>
+        <div className="absolute inset-0 z-0 bg-[linear-gradient(90deg,rgba(7,14,28,.88),rgba(7,14,28,.76)),var(--hero-image)] bg-cover bg-center" aria-hidden="true" />
+        <Wrap className="relative z-[1]">
           <div className="max-w-3xl" data-enter>
             <Eyebrow dark accent>
               {isIndonesian ? 'Siap mulai?' : isChinese ? '准备好了吗？' : 'Ready to start?'}

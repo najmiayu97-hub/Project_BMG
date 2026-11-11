@@ -317,6 +317,17 @@
     color: #ffffff;
   }
 
+  .btn--orange {
+    background: #ff8500;
+    color: #ffffff;
+  }
+
+  .btn--orange:hover {
+    background: #e97800;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+
   .btn--accent:hover {
     background: var(--color-accent-400);
     transform: translateY(-2px);
@@ -405,6 +416,12 @@
   .icon-badge--dark {
     background: rgba(255, 255, 255, 0.07);
     color: var(--color-brand-300);
+  }
+
+  .icon-badge--sm {
+    width: 40px;
+    height: 40px;
+    border-radius: 11px;
   }
 
   .chip {
@@ -859,39 +876,36 @@
     transform: translateY(0);
   }
 
-  /* Clients ------------------------------------------------------------ */
-  .clients {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    border-top: 1px solid var(--color-line);
-    border-left: 1px solid var(--color-line);
-  }
-
-  .clients__item {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 96px;
-    padding: 20px;
-    border-right: 1px solid var(--color-line);
-    border-bottom: 1px solid var(--color-line);
+  /* 404 page ----------------------------------------------------------- */
+  .notfound__code {
+    margin: 0;
     font-family: var(--font-display);
-    font-size: 18px;
-    font-weight: 700;
-    letter-spacing: 0.02em;
-    color: var(--color-muted);
-    transition: color 0.18s ease, background-color 0.18s ease;
+    font-size: clamp(5rem, 17vw, 10rem);
+    font-weight: 800;
+    letter-spacing: -0.05em;
+    line-height: 0.95;
+    color: #fff;
   }
 
-  .clients__item:hover {
-    color: var(--color-ink-900);
-    background: #fff;
+  .notfound__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-height: 44px;
+    font-size: 14px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.65);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    padding-bottom: 2px;
+    transition:
+      color 0.18s ease,
+      border-color 0.18s ease;
   }
 
-  @media (min-width: 720px) {
-    .clients {
-      grid-template-columns: repeat(5, 1fr);
-    }
+  .notfound__link:hover {
+    color: var(--color-accent-400);
+    border-color: var(--color-accent-400);
   }
 
   /* Timeline ----------------------------------------------------------- */
@@ -981,16 +995,7 @@
     }
   }
 
-  /* Closing CTA -------------------------------------------------------- */
-  .cta {
-    position: relative;
-    overflow: hidden;
-  }
-
-  .cta > .wrap {
-    position: relative;
-    z-index: 1;
-  }
+  /* Closing CTA watermark (404 page) ------------------------------------ */
 
   .cta-mark {
     position: absolute;
@@ -1023,16 +1028,39 @@
    Footer
    ========================================================================== */
 
-.footer-grid {
+.footer-main {
   display: grid;
   grid-template-columns: 1fr;
   gap: 40px;
-  padding-block: 72px 48px;
+  padding-block: 64px 32px;
 }
 
-@media (min-width: 720px) {
-  .footer-grid {
-    grid-template-columns: 1.5fr 1fr 1fr 1.3fr;
+@media (min-width: 900px) {
+  .footer-main {
+    grid-template-columns: 1fr auto;
+    align-items: start;
+    gap: 48px;
+  }
+}
+
+.footer-brand {
+  max-width: 380px;
+}
+
+.footer-navs {
+  display: flex;
+  gap: 48px;
+}
+
+@media (max-width: 899px) {
+  .footer-navs {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-navs {
+    flex-direction: column;
     gap: 32px;
   }
 }
@@ -1134,6 +1162,42 @@
 
 .footer-contact a:hover {
   color: #fff;
+}
+
+.footer-contact-band {
+  padding-block: 32px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.footer-contact--row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px 40px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.footer-contact--row li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.62);
+}
+
+.footer-contact--row svg {
+  flex: none;
+  margin-top: 0;
+}
+
+.footer-contact--row a {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
 }
 
 .footer-bottom {
