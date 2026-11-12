@@ -208,7 +208,7 @@ export default function Services() {
             </p>
             <div className="hero__actions">
               <ButtonLink to="/contact" variant="accent">
-                {isIndonesian ? 'Hubungi kami' : isChinese ? '联系我们' : 'Contact us'}
+                {isIndonesian ? 'Hubungi Kami' : isChinese ? '联系我们' : 'Contact Us'}
                 <span className="btn__icon" aria-hidden="true">→</span>
               </ButtonLink>
             </div>

@@ -253,7 +253,7 @@ export default function Event() {
             </p>
             <div className="hero__actions">
               <ButtonLink to="/contact" variant="accent">
-                {isIndonesian ? 'Mulai proyek' : isChinese ? '开始项目' : 'Start a project'}
+                {isIndonesian ? 'Hubungi Kami' : isChinese ? '联系我们' : 'Contact Us'}
                 <span className="btn__icon" aria-hidden="true">→</span>
               </ButtonLink>
             </div>

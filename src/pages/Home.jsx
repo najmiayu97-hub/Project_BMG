@@ -71,15 +71,15 @@ const process = [
 ]
 
 const clients = [
-  <span key="jansport" className="font-black tracking-[0.09em] text-[21px]">JanSport</span>,
-  <span key="coway" className="font-bold text-[26px]">coway</span>,
-  <span key="lumi" className="font-bold tracking-[0.32em] text-[19px]">LUMI</span>,
+  <span key="jansport" className="font-black tracking-[0.09em] text-[30px]">JanSport</span>,
+  <span key="coway" className="font-bold text-[38px]">coway</span>,
+  <span key="lumi" className="font-bold tracking-[0.32em] text-[27px]">LUMI</span>,
   <span key="serasa" className="flex flex-col items-center leading-[1]">
-    <span className="font-serif italic text-[23px]">Serasa</span>
-    <small className="mt-[2px] text-[8.5px] font-semibold tracking-[0.32em] text-white/70">BAKEHOUSE</small>
+    <span className="font-serif italic text-[33px]">Serasa</span>
+    <small className="mt-[3px] text-[10px] font-semibold tracking-[0.32em] text-white/70">BAKEHOUSE</small>
   </span>,
-  <span key="telpopek" className="flex items-center gap-[8px] text-[19px] font-bold leading-none">
-    <Phone size={22} aria-hidden="true" /> tel-popek
+  <span key="telpopek" className="flex items-center gap-[10px] text-[27px] font-bold leading-none">
+    <Phone size={30} aria-hidden="true" /> tel-popek
   </span>,
 ]
 
@@ -225,11 +225,11 @@ export default function HomePage() {
             </p>
             <div className="hero__actions">
               <ButtonLink to="/event" variant="accent">
-                {isIndonesian ? 'Jelajahi karya kami' : isChinese ? '查看我们的作品' : 'Explore our work'}
+                {isIndonesian ? 'Jelajahi Event Kami' : isChinese ? '查看我们的活动' : 'Explore Our Events'}
                 <span className="btn__icon" aria-hidden="true">→</span>
               </ButtonLink>
               <ButtonLink to="/contact" variant="outlineLight">
-                {isIndonesian ? 'Mari berkolaborasi' : isChinese ? '让我们合作' : "Let's work together"}
+                {isIndonesian ? 'Hubungi Kami' : isChinese ? '联系我们' : 'Contact Us'}
               </ButtonLink>
             </div>
             <ul className="hero__facts">
@@ -424,40 +424,55 @@ export default function HomePage() {
 
       {/* Clients ------------------------------------------------------ */}
       <section className="section--tight section--dark">
-        <Wrap className="flex flex-col gap-8 md:flex-row md:items-center md:justify-between md:gap-12">
-          <div className="shrink-0">
-            <Eyebrow dark accent>
-              {isIndonesian ? 'Klien Kami' : isChinese ? '我们的客户' : 'Our Clients'}
-            </Eyebrow>
-            <h2 className="h2 mt-4 text-white">
-              {isIndonesian ? (
-                <>
-                  Dipercaya oleh <span className="text-accent-400">brand terkemuka</span>
-                </>
-              ) : isChinese ? (
-                <>
-                  值得信赖的<span className="text-accent-400">知名品牌</span>
-                </>
-              ) : (
-                <>
-                  Trusted by <span className="text-accent-400">great brands</span>
-                </>
-              )}
-            </h2>
-          </div>
-          <div className="w-full max-w-[640px] overflow-hidden" aria-label={isIndonesian ? 'Daftar klien' : isChinese ? '客户列表' : 'Client list'}>
+        <Wrap className="-mt-4 flex flex-col items-center text-center">
+          <h2 className="h2 max-w-2xl text-white">
+            {isIndonesian ? (
+              <>
+                Dipercaya oleh <span className="text-accent-400">brand terkemuka</span>
+              </>
+            ) : isChinese ? (
+              <>
+                值得信赖的<span className="text-accent-400">知名品牌</span>
+              </>
+            ) : (
+              <>
+                Trusted by <span className="text-accent-400">great brands</span>
+              </>
+            )}
+          </h2>
+        </Wrap>
+        <div
+          className="relative mx-auto mt-10 w-[90%] overflow-hidden py-10 md:w-[80%]"
+          role="region"
+          aria-label={isIndonesian ? 'Daftar klien' : isChinese ? '客户列表' : 'Client list'}
+        >
+          <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-[var(--color-ink-900)] to-transparent md:w-24" aria-hidden="true" />
+          <div className="flex flex-col gap-6">
             <Marquee speed={42} gradient={false} pauseOnHover>
-              {clients.map((client) => (
+              {[...clients, ...clients].map((client, index) => (
                 <span
                   className="mx-7 flex shrink-0 items-center text-white/55 transition-colors hover:text-white"
-                  key={client.key}
+                  key={`row-top-${index}`}
                 >
                   {client}
                 </span>
               ))}
             </Marquee>
+            <div aria-hidden="true">
+              <Marquee speed={42} gradient={false} pauseOnHover direction="right">
+                {[...clients, ...clients].map((client, index) => (
+                  <span
+                    className="mx-7 flex shrink-0 items-center text-white/55 transition-colors hover:text-white"
+                    key={`row-bottom-${index}`}
+                  >
+                    {client}
+                  </span>
+                ))}
+              </Marquee>
+            </div>
           </div>
-        </Wrap>
+          <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-[var(--color-ink-900)] to-transparent md:w-24" aria-hidden="true" />
+        </div>
       </section>
 
       {/* Why BMG ------------------------------------------------------ */}
@@ -650,7 +665,7 @@ export default function HomePage() {
             </p>
             <div className="hero__actions">
               <ButtonLink to="/contact" variant="accent">
-                {isIndonesian ? 'Mulai proyek' : isChinese ? '开始项目' : 'Start a project'}
+                {isIndonesian ? 'Hubungi Kami' : isChinese ? '联系我们' : 'Contact Us'}
                 <span className="btn__icon" aria-hidden="true">→</span>
               </ButtonLink>
             </div>

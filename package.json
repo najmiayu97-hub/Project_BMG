@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "dev:classic": "vite --config classic/vite.config.js",
+    "tunnel": "ngrok http 5173",
     "build": "vite build",
     "build:classic": "vite build --config classic/vite.config.js",
     "build:all": "npm run build:classic && npm run build",

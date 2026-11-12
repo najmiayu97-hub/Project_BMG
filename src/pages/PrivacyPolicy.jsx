@@ -252,6 +252,13 @@ export default function PrivacyPolicy() {
             <a className="btn btn--outline" href={`mailto:${contactEmail}`}>
               {contactEmail}
             </a>
+            <a
+              className="btn btn--outline"
+              href={`${import.meta.env.BASE_URL}privacy-policy.html`}
+              title={isIndonesian ? 'Versi statis tanpa skrip — untuk pengunjung dengan ad blocker yang memblokir situs utama' : isChinese ? '静态无脚本版本——供广告拦截器拦截主站点时使用' : 'Statically rendered, script-free version — for visitors whose ad blocker blocks the main site'}
+            >
+              {isIndonesian ? 'Versi statis (tanpa skrip)' : isChinese ? '静态版本（无脚本）' : 'Static version (no scripts)'}
+            </a>
           </div>
         </Wrap>
       </section>
