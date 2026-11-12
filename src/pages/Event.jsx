@@ -1,34 +1,17 @@
 import { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { AnimatePresence, motion } from 'motion/react'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react'
 import { ButtonLink, Eyebrow, PageHero, Wrap } from '../components/ui.jsx'
+import { categoryLabels, events, formatEventDate } from '../data/events.js'
+import { localized } from '../data/localized.js'
 import { useLanguage } from '../i18n/language.js'
 
 const heroPhoto = 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1600&q=85'
 
-const eventItems = [
-  { title: { id: 'Bandung Festival 2026', en: 'Bandung Festival 2026', zh: '万隆节 2026' }, category: 'public', date: { from: 19, to: 24, month: 8, year: 2026 }, place: 'Summarecon Mall Bandung', image: 'https://images.unsplash.com/photo-1459749411175-04bf5292ceea?auto=format&fit=crop&w=850&q=85' },
-  { title: { id: 'Pengisi Acara Talkshow & Meet Up', en: 'Talkshow & Meet Up Guest Speaker', zh: '脱口秀与见面会嘉宾' }, category: 'mice', gathering: true, date: { month: 7, year: 2026 }, place: 'Bandung', image: 'https://images.unsplash.com/photo-1475721027785-f74eccf877e2?auto=format&fit=crop&w=850&q=85' },
-  { title: { id: 'Coway Brand Activation', en: 'Coway Brand Activation', zh: 'Coway 品牌推广活动' }, category: 'brand', date: { month: 5, year: 2026 }, place: 'Summarecon Mall Bandung', image: 'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=850&q=85' },
-  { title: { id: 'Tenant Event Local Brand Day', en: 'Tenant Event Local Brand Day', zh: '本地品牌日租户活动' }, category: 'tenant', date: { month: 4, year: 2026 }, place: 'Summarecon Mall Bandung', image: 'https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=850&q=85' },
-  { title: { id: 'Sera Sa Bakehouse Grand Opening', en: 'Sera Sa Bakehouse Grand Opening', zh: 'Sera Sa Bakehouse 盛大开业' }, category: 'public', date: { month: 3, year: 2026 }, place: 'Bandung', image: 'https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=850&q=85' },
-  { title: { id: 'Lumi Fun Run 5K', en: 'Lumi Fun Run 5K', zh: 'Lumi 5公里欢乐跑' }, category: 'sport', date: { month: 2, year: 2026 }, place: 'Bandung', image: 'https://images.unsplash.com/photo-1530549387789-4c1017266635?auto=format&fit=crop&w=850&q=85' },
-  { title: { id: 'Corporate Gathering & Awarding Night', en: 'Corporate Gathering & Awards Night', zh: '企业聚会暨颁奖之夜' }, category: 'corporate', gathering: true, date: { month: 1, year: 2026 }, place: 'Bandung', image: 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=850&q=85' },
-  { title: { id: 'Live Streaming Concert', en: 'Live-Streamed Concert', zh: '线上直播音乐会' }, category: 'hybrid', date: { month: 12, year: 2025 }, place: 'Bandung', image: 'https://images.unsplash.com/photo-1501386761578-eac5c94b800a?auto=format&fit=crop&w=850&q=85' },
-]
+const MotionLink = motion.create(Link)
 
 const filters = ['All Events', 'Mice & Professional', 'Public & Community', 'Corporate', 'Gathering & Team Building', 'Sport Events']
-
-const categoryLabels = {
-  public: { id: 'Acara Publik', en: 'Public Event', zh: '公共活动' },
-  mice: { id: 'Acara MICE', en: 'MICE Event', zh: 'MICE 活动' },
-  brand: { id: 'Aktivasi Merek', en: 'Brand Activation', zh: '品牌推广' },
-  tenant: { id: 'Acara Tenant', en: 'Tenant Event', zh: '商户活动' },
-  sport: { id: 'Acara Olahraga', en: 'Sport Event', zh: '体育活动' },
-  corporate: { id: 'Acara Korporat', en: 'Corporate Event', zh: '企业活动' },
-  hybrid: { id: 'Acara Hibrida', en: 'Hybrid Event', zh: '混合式活动' },
-}
 
 function matchesFilter(item, filter) {
   if (filter === 'All Events') return true
@@ -46,7 +29,7 @@ export default function Event() {
   const isIndonesian = language === 'id'
   const isChinese = language === 'zh'
 
-  const visibleItems = useMemo(() => eventItems.filter((item) => matchesFilter(item, filter)), [filter])
+  const visibleItems = useMemo(() => events.filter((item) => matchesFilter(item, filter)), [filter])
   const pageSize = 6
   const totalPages = Math.max(1, Math.ceil(visibleItems.length / pageSize))
   const currentPage = Math.min(page, totalPages)
@@ -55,21 +38,9 @@ export default function Event() {
     return visibleItems.slice(start, start + pageSize)
   }, [visibleItems, currentPage])
 
-  const formatDate = (date) => {
-    if (isChinese) {
-      const from = date.from ? `${date.from}日` : ''
-      const to = date.to ? `${date.to}日` : ''
-      const range = date.from && date.to ? `${from}-${to}` : date.from ? from : to
-      return `${date.year}年${date.month}月${range}`
-    }
-    const months = isIndonesian
-      ? ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember']
-      : ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
-    const monthName = months[date.month - 1]
-    if (date.from && date.to) return `${date.from}-${date.to} ${monthName} ${date.year}`
-    if (date.from) return `${date.from} ${monthName} ${date.year}`
-    return `${monthName} ${date.year}`
-  }
+  const learnMore = isIndonesian ? 'Lihat detail event' : isChinese ? '查看活动详情' : 'View event details'
+
+  const formatDate = (date) => formatEventDate(date, language)
 
   const filterLabels = {
     'All Events': isIndonesian ? 'Semua Event' : isChinese ? '全部活动' : 'All Events',
@@ -153,32 +124,40 @@ export default function Event() {
               exit={{ opacity: 0, y: -12 }}
               transition={{ duration: 0.28 }}
             >
-              {pagedItems.map((item, index) => (
-                <motion.article
-                  className="group relative flex min-h-[280px] flex-col justify-end overflow-hidden rounded-[20px] bg-ink-800 text-white"
-                  key={item.title.id}
-                  initial={{ opacity: 0, y: 16 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.3, delay: index * 0.05 }}
-                >
-                  <img
-                    className="absolute inset-0 z-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    src={item.image}
-                    alt={item.title[language]}
-                    loading="lazy"
-                  />
-                  <div className="absolute inset-0 z-[1] bg-gradient-to-t from-ink-950/95 via-ink-950/45 to-transparent" aria-hidden="true" />
-                  <span className="chip absolute left-4 top-4 z-[3] bg-accent-500 text-white">
-                    {categoryLabels[item.category][language]}
-                  </span>
-                  <div className="relative z-[2] p-6">
-                    <p className="text-[12px] font-medium text-white/70">
-                      {item.place} · {formatDate(item.date)}
-                    </p>
-                    <h3 className="h3 mt-2 text-white">{item.title[language]}</h3>
-                  </div>
-                </motion.article>
-              ))}
+              {pagedItems.map((item, index) => {
+                const itemTitle = localized(item.title, language)
+                return (
+                  <MotionLink
+                    className="group relative flex min-h-[280px] flex-col justify-end overflow-hidden rounded-[20px] bg-ink-800 text-white"
+                    key={item.slug}
+                    to={`/event/${item.slug}`}
+                    initial={{ opacity: 0, y: 16 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.3, delay: index * 0.05 }}
+                  >
+                    <img
+                      className="absolute inset-0 z-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      src={item.image}
+                      alt={itemTitle}
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 z-[1] bg-gradient-to-t from-ink-950/95 via-ink-950/45 to-transparent" aria-hidden="true" />
+                    <span className="chip absolute left-4 top-4 z-[3] bg-accent-500 text-white">
+                      {localized(categoryLabels[item.category], language)}
+                    </span>
+                    <div className="relative z-[2] p-6">
+                      <p className="text-[12px] font-medium text-white/70">
+                        {item.place} · {formatDate(item.date)}
+                      </p>
+                      <h3 className="h3 mt-2 text-white">{itemTitle}</h3>
+                      <span className="mt-3 inline-flex items-center gap-2 text-[12px] font-bold uppercase tracking-[0.08em] text-white/70 transition-colors group-hover:text-white">
+                        {learnMore}
+                        <ArrowRight size={14} aria-hidden="true" />
+                      </span>
+                    </div>
+                  </MotionLink>
+                )
+              })}
             </motion.div>
           </AnimatePresence>
 

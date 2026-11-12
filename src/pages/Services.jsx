@@ -1,19 +1,11 @@
 import { Link } from 'react-router-dom'
-import { Lightbulb, Play, Search, Settings, Target, TrendingUp } from 'lucide-react'
+import { ArrowRight, Lightbulb, Play, Search, Settings, Target, TrendingUp } from 'lucide-react'
 import { ButtonLink, Eyebrow, PageHero, SectionHead, Wrap } from '../components/ui.jsx'
+import { localized, services } from '../data/services.js'
 import { useLanguage } from '../i18n/language.js'
 
 const heroPhoto = 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=1600&q=85'
 const ctaPhoto = 'https://images.unsplash.com/photo-1501386761578-eac5c94b800a?auto=format&fit=crop&w=1600&q=88'
-
-const serviceCards = [
-  { number: '01', title: 'Event Planning', category: 'Planning', image: 'https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=900&q=85', text: 'Perencanaan strategis dan konsep kreatif yang dirancang untuk menciptakan event bermakna dan berkesan.' },
-  { number: '02', title: 'Event Production & Logistics', category: 'Production', image: 'https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?auto=format&fit=crop&w=900&q=85', text: 'Manajemen produksi end-to-end, pengadaan vendor, venue, peralatan, hingga eksekusi di lapangan.' },
-  { number: '03', title: 'Media Buying', category: 'Media', image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=900&q=85', text: 'Penempatan media yang tepat untuk memaksimalkan jangkauan dan efektivitas promosi event.' },
-  { number: '04', title: 'Digital & Social Media Amplification', category: 'Digital', image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=900&q=85', text: 'Meningkatkan awareness event melalui kampanye digital, konten kreatif, dan engagement audiens.' },
-  { number: '05', title: 'Brand Activation', category: 'Activation', image: 'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=900&q=85', text: 'Menghidupkan brand melalui pengalaman interaktif yang menarik perhatian dan menciptakan koneksi kuat dengan audiens.' },
-  { number: '06', title: 'Talent & Entertainment Management', category: 'Talent', image: 'https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=900&q=85', text: 'Menyediakan talent, MC, performer, hingga hiburan berkualitas yang sesuai dengan kebutuhan event Anda.' },
-]
 
 const approachSteps = [
   [Search, '01', 'Discover', 'Memahami tujuan, audiens, dan kebutuhan event Anda.'],
@@ -29,25 +21,8 @@ export default function Services() {
   const isIndonesian = language === 'id'
   const isChinese = language === 'zh'
 
-  const displayedServices = isIndonesian
-    ? serviceCards
-    : isChinese
-      ? [
-          { ...serviceCards[0], title: '活动策划', category: '策划', text: '结合创意与战略思维，为每场活动打造有意义且难忘的体验。' },
-          { ...serviceCards[1], title: '活动制作与物流', category: '制作', text: '覆盖活动全流程管理、供应商协调、场地与设备安排及现场执行。' },
-          { ...serviceCards[2], title: '媒体投放', category: '媒体', text: '精准投放媒体资源，提升活动曝光率与宣传效果。' },
-          { ...serviceCards[3], title: '数字与社交媒体推广', category: '数字', text: '通过数字营销、创意内容与受众互动提升活动影响力。' },
-          { ...serviceCards[4], title: '品牌活动', category: '活动', text: '通过互动体验让品牌与受众建立强连接，增强品牌认知。' },
-          { ...serviceCards[5], title: '艺人与娱乐管理', category: '艺人', text: '为活动提供主持人、表演者与娱乐资源，满足不同场景需求。' },
-        ]
-      : [
-          { ...serviceCards[0], text: 'Strategic planning and creative concepts designed to make every event meaningful and memorable.' },
-          { ...serviceCards[1], text: 'End-to-end production management, vendor sourcing, venue, equipment, and on-site execution.' },
-          { ...serviceCards[2], text: 'The right media placements to maximize your event promotion reach and effectiveness.' },
-          { ...serviceCards[3], text: 'Boosting event awareness through digital campaigns, creative content, and audience engagement.' },
-          { ...serviceCards[4], text: 'Bringing brands to life through engaging interactive experiences that build strong audience connections.' },
-          { ...serviceCards[5], text: 'Providing talent, MCs, performers, and quality entertainment tailored to your event needs.' },
-        ]
+  const t = (field) => localized(field, language)
+  const learnMore = isIndonesian ? 'Lihat detail layanan' : isChinese ? '查看服务详情' : 'View service details'
 
   const displayedSteps = isIndonesian
     ? approachSteps
@@ -109,27 +84,38 @@ export default function Services() {
       <section className="section">
         <Wrap>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {displayedServices.map((service) => (
-              <article className="card card--hover group overflow-hidden" key={service.number}>
-                <div className="relative aspect-[4/3] overflow-hidden bg-ink-800">
-                  <img
-                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    src={service.image}
-                    alt={`${service.title} ${isIndonesian ? 'layanan' : isChinese ? '服务' : 'service'}`}
-                    loading="lazy"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-ink-950/70 via-ink-950/10 to-transparent" aria-hidden="true" />
-                  <span className="chip absolute left-4 top-4 bg-white/92 text-ink-900">
-                    {service.category}
-                  </span>
-                </div>
-                <div className="p-7">
-                  <span className="font-display text-sm font-bold text-brand-600">{service.number}</span>
-                  <h3 className="h3 mt-2">{service.title}</h3>
-                  <p className="mt-3 text-[15px] leading-relaxed text-muted">{service.text}</p>
-                </div>
-              </article>
-            ))}
+            {services.map((service) => {
+              const serviceTitle = t(service.title)
+              return (
+                <Link
+                  className="card card--hover group overflow-hidden"
+                  key={service.slug}
+                  to={`/services/${service.slug}`}
+                >
+                  <div className="relative aspect-[4/3] overflow-hidden bg-ink-800">
+                    <img
+                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      src={service.image}
+                      alt={`${serviceTitle} ${isIndonesian ? 'layanan' : isChinese ? '服务' : 'service'}`}
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-ink-950/70 via-ink-950/10 to-transparent" aria-hidden="true" />
+                    <span className="chip absolute left-4 top-4 bg-white/92 text-ink-900">
+                      {t(service.category)}
+                    </span>
+                  </div>
+                  <div className="p-7">
+                    <span className="font-display text-sm font-bold text-brand-600">{service.number}</span>
+                    <h3 className="h3 mt-2">{serviceTitle}</h3>
+                    <p className="mt-3 text-[15px] leading-relaxed text-muted">{t(service.text)}</p>
+                    <span className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-brand-600">
+                      {learnMore}
+                      <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" />
+                    </span>
+                  </div>
+                </Link>
+              )
+            })}
           </div>
         </Wrap>
       </section>

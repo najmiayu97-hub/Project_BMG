@@ -30,10 +30,10 @@ export default function Footer() {
   }
 
   const serviceLinks = [
-    isIndonesian ? 'Perencanaan Event' : isChinese ? '活动策划' : 'Event Planning',
-    isIndonesian ? 'Produksi & Logistik Event' : isChinese ? '活动制作与物流' : 'Event Production & Logistics',
-    'Media Buying',
-    isIndonesian ? 'Digital & Media Sosial' : isChinese ? '数字与社交媒体' : 'Digital & Social Media',
+    { label: isIndonesian ? 'Perencanaan Event' : isChinese ? '活动策划' : 'Event Planning', to: '/services/event-planning' },
+    { label: isIndonesian ? 'Produksi & Logistik Event' : isChinese ? '活动制作与物流' : 'Event Production & Logistics', to: '/services/event-production-logistics' },
+    { label: 'Media Buying', to: '/services/media-buying' },
+    { label: isIndonesian ? 'Digital & Media Sosial' : isChinese ? '数字与社交媒体' : 'Digital & Social Media', to: '/services/digital-social-media-amplification' },
   ]
 
   const pageLinks = [
@@ -83,9 +83,9 @@ export default function Footer() {
           <nav aria-label={t.services}>
             <h2 className="footer-heading">{t.services}</h2>
             <ul className="footer-list">
-              {serviceLinks.map((label) => (
-                <li key={label}>
-                  <Link to="/services">{label}</Link>
+              {serviceLinks.map((link) => (
+                <li key={link.to}>
+                  <Link to={link.to}>{link.label}</Link>
                 </li>
               ))}
             </ul>

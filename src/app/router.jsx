@@ -3,7 +3,9 @@ import MainLayout from '../layouts/MainLayout.jsx'
 import Home from '../pages/Home.jsx'
 import AboutUs from '../pages/AboutUs.jsx'
 import Services from '../pages/Services.jsx'
+import ServiceDetail from '../pages/ServiceDetail.jsx'
 import Event from '../pages/Event.jsx'
+import EventDetail from '../pages/EventDetail.jsx'
 import Contact from '../pages/Contact.jsx'
 import Compare from '../pages/Compare.jsx'
 import NotFound from '../pages/NotFound.jsx'
@@ -23,7 +25,9 @@ export const router = createBrowserRouter([
       { path: 'about-us', element: <AboutUs /> },
       { path: 'about-us/our-team', element: <OurTeam /> },
       { path: 'services', element: <Services /> },
+      { path: 'services/:slug', element: <ServiceDetail /> },
       { path: 'event', element: <Event /> },
+      { path: 'event/:slug', element: <EventDetail /> },
       { path: 'portfolio', element: <Navigate to="/event" replace /> },
       { path: 'contact', element: <Contact /> },
       { path: 'privacy', element: <PrivacyPolicy /> },
