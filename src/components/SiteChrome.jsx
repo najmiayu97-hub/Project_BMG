@@ -52,40 +52,42 @@ export function SiteHeader() {
   }, [open])
 
   return (
-    <header className={`site-header${scrolled ? ' is-scrolled' : ''}`}>
-      <div className="wrap site-header__inner">
-        <Logo light />
+    <>
+      <header className={`site-header${scrolled ? ' is-scrolled' : ''}`}>
+        <div className="wrap site-header__inner">
+          <Logo light />
 
-        <nav className="site-nav" aria-label={navLabel}>
-          {routes.map((route) => (
-            <NavLink
-              key={route.label}
-              to={route.href}
-              end={route.href === '/'}
-              className={({ isActive }) => `nav-link${isActive ? ' is-active' : ''}`}
+          <nav className="site-nav" aria-label={navLabel}>
+            {routes.map((route) => (
+              <NavLink
+                key={route.label}
+                to={route.href}
+                end={route.href === '/'}
+                className={({ isActive }) => `nav-link${isActive ? ' is-active' : ''}`}
+              >
+                {labels[route.label]}
+              </NavLink>
+            ))}
+          </nav>
+
+          <div className="site-header__actions">
+            <LanguageSwitcher />
+            <ButtonLink to="/contact" variant="accent" size="sm" className="site-header__cta">
+              {labels.contact}
+            </ButtonLink>
+            <button
+              type="button"
+              className="nav-toggle"
+              aria-expanded={open}
+              aria-controls="mobile-menu"
+              aria-label={open ? closeLabel : openLabel}
+              onClick={() => setOpen((value) => !value)}
             >
-              {labels[route.label]}
-            </NavLink>
-          ))}
-        </nav>
-
-        <div className="site-header__actions">
-          <LanguageSwitcher />
-          <ButtonLink to="/contact" variant="accent" size="sm" className="site-header__cta">
-            {labels.contact}
-          </ButtonLink>
-          <button
-            type="button"
-            className="nav-toggle"
-            aria-expanded={open}
-            aria-controls="mobile-menu"
-            aria-label={open ? closeLabel : openLabel}
-            onClick={() => setOpen((value) => !value)}
-          >
-            {open ? <X size={22} /> : <Menu size={22} />}
-          </button>
+              {open ? <X size={22} /> : <Menu size={22} />}
+            </button>
+          </div>
         </div>
-      </div>
+      </header>
 
       <div id="mobile-menu" className={`mobile-menu${open ? ' is-open' : ''}`}>
         <nav aria-label={navLabel}>
@@ -102,11 +104,11 @@ export function SiteHeader() {
           ))}
         </nav>
         <div className="mobile-menu__footer">
-          <ButtonLink to="/contact" variant="accent" block onClick={() => setOpen(false)}>
+          <ButtonLink to="/contact" variant="accent" block className="mobile-menu__cta" onClick={() => setOpen(false)}>
             {labels.contact}
           </ButtonLink>
         </div>
       </div>
-    </header>
+    </>
   )
 }

@@ -806,6 +806,29 @@
     gap: 10px;
   }
 
+  /* On mobile the contact CTA lives at the bottom of the mobile menu only */
+  .site-header__cta {
+    display: none;
+  }
+
+  /* Header CTA: blue-black glass that follows the header theme, with a blue label */
+  .site-header__cta.btn {
+    border: 1px solid rgba(111, 158, 245, 0.42);
+    background: rgba(23, 35, 63, 0.55);
+    color: var(--color-accent-300);
+    -webkit-backdrop-filter: blur(10px) saturate(140%);
+    backdrop-filter: blur(10px) saturate(140%);
+    box-shadow: none;
+  }
+
+  .site-header__cta.btn:hover {
+    border-color: rgba(157, 188, 251, 0.7);
+    background: rgba(31, 47, 82, 0.72);
+    color: var(--color-accent-200);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.32);
+  }
+
   .nav-toggle {
     display: inline-flex;
     align-items: center;
@@ -839,6 +862,7 @@
     left: 0;
     right: 0;
     bottom: 0;
+    z-index: 40;
     overflow-y: auto;
     animation: menu-in 0.24s ease both;
   }
@@ -863,6 +887,7 @@
     display: grid;
     gap: 14px;
     padding: 20px var(--gutter) 26px;
+    margin-top: auto;
     position: sticky;
     bottom: 0;
     background: rgba(11, 18, 32, 0.85);
@@ -870,9 +895,29 @@
     -webkit-backdrop-filter: blur(6px);
   }
 
+  /* Mobile menu CTA matches the glass header treatment, not the solid accent fill */
+  .mobile-menu__cta.btn {
+    border: 1px solid rgba(111, 158, 245, 0.42);
+    background: rgba(23, 35, 63, 0.55);
+    color: var(--color-accent-300);
+    -webkit-backdrop-filter: blur(10px) saturate(140%);
+    backdrop-filter: blur(10px) saturate(140%);
+    box-shadow: none;
+  }
+
+  .mobile-menu__cta.btn:active {
+    border-color: rgba(157, 188, 251, 0.7);
+    background: rgba(31, 47, 82, 0.72);
+    color: var(--color-accent-200);
+  }
+
   @media (min-width: 900px) {
     .site-nav {
       display: flex;
+    }
+
+    .site-header__cta {
+      display: inline-flex;
     }
 
     .nav-toggle,
@@ -881,11 +926,16 @@
     }
   }
 
-  @media (max-width: 400px) {
-    .site-header__cta {
-      display: none;
+  @media (max-width: 899px) {
+    .site-header.is-scrolled {
+      background: rgba(11, 18, 32, 0.92);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.42);
     }
+  }
 
+  @media (max-width: 400px) {
     .site-header__inner {
       gap: 8px;
     }
@@ -1089,7 +1139,7 @@
 
 .footer-navs {
   display: flex;
-  gap: 48px;
+  gap: 32px;
 }
 
 @media (max-width: 899px) {
@@ -1101,7 +1151,7 @@
 @media (max-width: 480px) {
   .footer-navs {
     flex-direction: column;
-    gap: 32px;
+    gap: 24px;
   }
 }
 
@@ -1142,7 +1192,7 @@
 }
 
 .footer-heading {
-  margin: 0 0 18px;
+  margin: 0 0 14px;
   font-family: var(--font-display);
   font-size: 13px;
   font-weight: 700;
@@ -1157,13 +1207,13 @@
   margin: 0;
   padding: 0;
   display: grid;
-  gap: 12px;
+  gap: 4px;
 }
 
 .footer-list a {
   display: flex;
   align-items: center;
-  min-height: 44px;
+  min-height: 36px;
   font-size: 14px;
   color: rgba(255, 255, 255, 0.62);
   text-decoration: none;
