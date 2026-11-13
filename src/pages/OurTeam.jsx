@@ -440,18 +440,18 @@ export default function OurTeam() {
         </Wrap>
       </section>
 
-      {selected ? createPortal(
-        <div
-          className="fixed inset-0 z-50 flex items-end justify-center bg-ink-900/70 backdrop-blur-sm sm:items-center sm:p-6"
-          onClick={() => setSelected(null)}
-        >
+        {selected ? createPortal(
           <div
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="our-team-modal-title"
-            className="relative max-h-[92vh] w-full max-w-md overflow-y-auto rounded-t-[24px] bg-white p-6 text-center shadow-xl sm:rounded-[24px] sm:p-8"
-            onClick={(event) => event.stopPropagation()}
+            className="fixed inset-0 z-50 flex items-end justify-center bg-ink-900/70 backdrop-blur-sm sm:items-center sm:p-6 animate-fade-in"
+            onClick={() => setSelected(null)}
           >
+            <div
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="our-team-modal-title"
+              className="relative max-h-[92vh] w-full max-w-md overflow-y-auto rounded-t-[24px] bg-white p-6 text-center shadow-xl sm:rounded-[24px] sm:p-8 animate-modal-in"
+              onClick={(event) => event.stopPropagation()}
+            >
             <button
               ref={closeButtonRef}
               type="button"
