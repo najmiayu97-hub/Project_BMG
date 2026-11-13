@@ -24,6 +24,10 @@ export default function Footer() {
     event: isIndonesian ? 'Event' : isChinese ? '活动' : 'Event',
     contactNav: isIndonesian ? 'Kontak' : isChinese ? '联系' : 'Contact',
     privacy: isIndonesian ? 'Kebijakan Privasi' : isChinese ? '隐私政策' : 'Privacy Policy',
+    helpGroup: isIndonesian ? 'Bantuan' : isChinese ? '帮助' : 'Help',
+    terms: isIndonesian ? 'Syarat & Ketentuan' : isChinese ? '条款与条件' : 'Terms & Conditions',
+    helpCenter: isIndonesian ? 'Pusat Bantuan' : isChinese ? '帮助中心' : 'Help Center',
+    faq: isIndonesian ? 'FAQ' : isChinese ? '常见问题' : 'FAQ',
     address: 'Jl. Tamblong No.46, Kb. Pisang, Kec. Sumur Bandung, Bandung, Jawa Barat',
     rights: isIndonesian ? 'Hak cipta dilindungi.' : isChinese ? '保留所有权利。' : 'All rights reserved.',
     backToTop: isIndonesian ? 'Kembali ke atas' : isChinese ? '返回顶部' : 'Back to top',
@@ -42,7 +46,13 @@ export default function Footer() {
     { label: t.servicesNav, to: '/services' },
     { label: t.event, to: '/event' },
     { label: t.contactNav, to: '/contact' },
+  ]
+
+  const helpLinks = [
     { label: t.privacy, to: '/privacy' },
+    { label: t.terms, to: '/terms' },
+    { label: t.helpCenter, to: '/help' },
+    { label: t.faq, to: '/faq' },
   ]
 
   return (
@@ -84,6 +94,17 @@ export default function Footer() {
             <h2 className="footer-heading">{t.services}</h2>
             <ul className="footer-list">
               {serviceLinks.map((link) => (
+                <li key={link.to}>
+                  <Link to={link.to}>{link.label}</Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+          <nav aria-label={t.helpGroup}>
+            <h2 className="footer-heading">{t.helpGroup}</h2>
+            <ul className="footer-list">
+              {helpLinks.map((link) => (
                 <li key={link.to}>
                   <Link to={link.to}>{link.label}</Link>
                 </li>

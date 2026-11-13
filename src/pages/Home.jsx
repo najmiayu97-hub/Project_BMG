@@ -83,6 +83,19 @@ const clients = [
   </span>,
 ]
 
+const clientsSmall = [
+  <span key="jansport" className="font-black tracking-[0.09em] text-[20px]">JanSport</span>,
+  <span key="coway" className="font-bold text-[26px]">coway</span>,
+  <span key="lumi" className="font-bold tracking-[0.32em] text-[18px]">LUMI</span>,
+  <span key="serasa" className="flex flex-col items-center leading-[1]">
+    <span className="font-serif italic text-[22px]">Serasa</span>
+    <small className="mt-[2px] text-[8px] font-semibold tracking-[0.32em] text-white/60">BAKEHOUSE</small>
+  </span>,
+  <span key="telpopek" className="flex items-center gap-[8px] text-[18px] font-bold leading-none">
+    <Phone size={21} aria-hidden="true" /> tel-popek
+  </span>,
+]
+
 const iconMap = {
   calendar: Calendar,
   tools: Wrench,
@@ -249,7 +262,7 @@ export default function HomePage() {
 
       {/* About -------------------------------------------------------- */}
       <section className="section">
-        <Wrap className="grid items-start gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-20">
+        <Wrap className="grid items-start gap-6 lg:grid-cols-[1.05fr_0.95fr] lg:gap-20">
           <div>
             <SectionHead
               eyebrow={isIndonesian ? 'Tentang BMG' : isChinese ? '关于 BMG' : 'About BMG'}
@@ -287,9 +300,9 @@ export default function HomePage() {
               ))}
             </div>
           </div>
-          <div className="w-full max-w-[220px] justify-self-center sm:max-w-[250px] md:max-w-[275px] lg:max-w-[300px] lg:justify-self-end xl:max-w-[330px]">
+          <div className="w-full max-w-[300px] justify-self-center sm:max-w-[340px] md:max-w-[380px] lg:max-w-[420px] lg:justify-self-end xl:max-w-[460px]">
             <img
-              className="aspect-[4/3] w-full rounded-[20px] object-cover shadow-lg"
+              className="aspect-[16/9] w-full rounded-[20px] object-cover shadow-lg"
               src={images.about}
               alt={isIndonesian ? 'Tim BMG berkolaborasi dalam rapat perencanaan event' : isChinese ? 'BMG 团队在活动策划会议中协作' : 'BMG team collaborating in an event planning meeting'}
               loading="lazy"
@@ -349,7 +362,7 @@ export default function HomePage() {
       {/* Work --------------------------------------------------------- */}
       <section className="section section--white">
         <Wrap>
-          <div className="flex flex-wrap items-center justify-between gap-8">
+          <div className="flex flex-wrap items-center justify-between gap-4 md:gap-8">
             <SectionHead
               eyebrow={isIndonesian ? 'Karya Kami' : isChinese ? '我们的作品' : 'Our Work'}
               title={
@@ -375,7 +388,7 @@ export default function HomePage() {
             </ButtonLink>
           </div>
 
-          <div className="relative mt-10">
+          <div className="relative mt-6 md:mt-10">
             <div
               className="flex snap-x snap-mandatory gap-5 overflow-x-auto pb-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
               ref={workCarouselRef}
@@ -383,7 +396,7 @@ export default function HomePage() {
               {projects.map((project) => (
                 <Link
                   to="/event"
-                  className="group relative block aspect-[4/3] shrink-0 basis-[82%] snap-start overflow-hidden rounded-[14px] bg-ink-800 sm:basis-[42%] lg:basis-[32%]"
+                  className="group relative block aspect-[4/3] shrink-0 basis-[90%] snap-start overflow-hidden rounded-[14px] bg-ink-800 sm:basis-[46%] lg:basis-[34%]"
                   key={project.title.id}
                 >
                   <img
@@ -442,12 +455,12 @@ export default function HomePage() {
           </h2>
         </Wrap>
         <div
-          className="relative mx-auto mt-10 w-[90%] overflow-hidden py-10 md:w-[80%]"
+          className="relative mx-auto mt-6 md:mt-10 w-[90%] overflow-hidden py-8 md:py-10 md:w-[80%]"
           role="region"
           aria-label={isIndonesian ? 'Daftar klien' : isChinese ? '客户列表' : 'Client list'}
         >
           <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-[var(--color-ink-900)] to-transparent md:w-24" aria-hidden="true" />
-          <div className="flex flex-col gap-6">
+          <div className="flex flex-col gap-10 md:gap-14">
             <Marquee speed={42} gradient={false} pauseOnHover>
               {[...clients, ...clients].map((client, index) => (
                 <span
@@ -459,10 +472,10 @@ export default function HomePage() {
               ))}
             </Marquee>
             <div aria-hidden="true">
-              <Marquee speed={42} gradient={false} pauseOnHover direction="right">
-                {[...clients, ...clients].map((client, index) => (
+              <Marquee speed={36} gradient={false} pauseOnHover direction="right">
+                {[...clientsSmall, ...clientsSmall].map((client, index) => (
                   <span
-                    className="mx-7 flex shrink-0 items-center text-white/55 transition-colors hover:text-white"
+                    className="mx-7 flex shrink-0 items-center text-white/35 transition-colors hover:text-white"
                     key={`row-bottom-${index}`}
                   >
                     {client}
@@ -567,7 +580,7 @@ export default function HomePage() {
 
       {/* Field stories ------------------------------------------------ */}
       <section className="section section--white">
-        <Wrap className="grid items-center gap-12 lg:grid-cols-[0.85fr_1.15fr]">
+        <Wrap className="grid items-center gap-6 lg:grid-cols-[0.85fr_1.15fr]">
           <div>
             <SectionHead
               eyebrow={isIndonesian ? 'Cerita di Lapangan' : isChinese ? '现场故事' : 'Field Stories'}
@@ -593,9 +606,10 @@ export default function HomePage() {
                     ? '从首次 brief 到落地执行，我们都在现场。'
                     : 'From the first brief to event day, we stay on the ground.'
               }
+              className="mb-4"
             />
-            <ButtonLink to="/event" variant="outline" className="mt-8">
-              {isIndonesian ? 'Lihat semua karya' : isChinese ? '查看全部作品' : 'See all work'}
+            <ButtonLink to="/event" variant="outline" className="mt-4">
+              {isIndonesian ? 'Lihat semua Event' : isChinese ? '查看全部活动' : 'View all events'}
               <span className="btn__icon" aria-hidden="true">→</span>
             </ButtonLink>
           </div>

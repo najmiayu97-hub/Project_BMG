@@ -3,60 +3,19 @@ import { Link } from 'react-router-dom'
 import { ChevronDown, Clock, Lock, Mail, MapPin, MessageSquare, Phone, User } from 'lucide-react'
 import { PageHero, Wrap } from '../components/ui.jsx'
 import { useLanguage } from '../i18n/language.js'
+import PhoneInput from 'react-phone-number-input'
+import flags from 'react-phone-number-input/flags'
+import 'react-phone-number-input/style.css'
 
 const contactPhoto = 'https://images.unsplash.com/photo-1449824913935-59a10b8d2000?auto=format&fit=crop&w=1100&q=85'
 const contactHeroPhoto = 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=1600&q=85'
 
-const countryCallingCodes = [
-  ['AF', '+93'], ['AL', '+355'], ['DZ', '+213'], ['AS', '+1 684'], ['AD', '+376'], ['AO', '+244'],
-  ['AI', '+1 264'], ['AG', '+1 268'], ['AR', '+54'], ['AM', '+374'], ['AW', '+297'], ['AU', '+61'],
-  ['AT', '+43'], ['AZ', '+994'], ['BS', '+1 242'], ['BH', '+974'], ['BD', '+880'], ['BB', '+1 246'],
-  ['BY', '+375'], ['BE', '+32'], ['BZ', '+501'], ['BJ', '+229'], ['BM', '+1 441'], ['BT', '+975'],
-  ['BO', '+591'], ['BA', '+387'], ['BW', '+267'], ['BR', '+55'], ['VG', '+1 284'], ['BN', '+673'],
-  ['BG', '+351'], ['BF', '+226'], ['BI', '+257'], ['KH', '+855'], ['CM', '+237'], ['CA', '+1'],
-  ['CV', '+238'], ['KY', '+1 345'], ['CF', '+236'], ['TD', '+235'], ['CL', '+56'], ['CN', '+86'],
-  ['CO', '+57'], ['KM', '+269'], ['CG', '+242'], ['CD', '+243'], ['CK', '+682'], ['CR', '+506'],
-  ['CI', '+225'], ['HR', '+385'], ['CU', '+53'], ['CW', '+599'], ['CY', '+357'], ['CZ', '+420'],
-  ['DK', '+45'], ['DJ', '+253'], ['DM', '+1 767'], ['DO', '+1 809'], ['DO', '+1 829'], ['DO', '+1 849'],
-  ['EC', '+593'], ['EG', '+20'], ['SV', '+503'], ['GQ', '+240'], ['ER', '+291'], ['EE', '+372'],
-  ['SZ', '+268'], ['ET', '+251'], ['FK', '+500'], ['FO', '+298'], ['FJ', '+679'], ['FI', '+358'],
-  ['FR', '+33'], ['GF', '+594'], ['PF', '+689'], ['GA', '+241'], ['GM', '+220'], ['GE', '+995'],
-  ['DE', '+49'], ['GH', '+233'], ['GI', '+350'], ['GR', '+30'], ['GL', '+299'], ['GD', '+1 473'],
-  ['GP', '+590'], ['GU', '+1 671'], ['GT', '+502'], ['GG', '+44 1481'], ['GN', '+224'], ['GW', '+245'],
-  ['GY', '+592'], ['HT', '+509'], ['HN', '+504'], ['HK', '+852'], ['HU', '+36'], ['IS', '+354'],
-  ['IN', '+91'], ['ID', '+62'], ['IR', '+98'], ['IQ', '+964'], ['IE', '+353'], ['IM', '+44 1624'],
-  ['IL', '+972'], ['IT', '+39'], ['JM', '+1 876'], ['JP', '+81'], ['JE', '+44 1534'], ['JO', '+962'],
-  ['KZ', '+7'], ['KE', '+254'], ['KI', '+686'], ['XK', '+383'], ['KW', '+965'], ['KG', '+996'],
-  ['LA', '+856'], ['LV', '+371'], ['LB', '+961'], ['LS', '+266'], ['LR', '+231'], ['LY', '+218'],
-  ['LI', '+423'], ['LT', '+370'], ['LU', '+352'], ['MO', '+853'], ['MG', '+261'], ['MW', '+265'],
-  ['MY', '+60'], ['MV', '+960'], ['ML', '+223'], ['MT', '+356'], ['MH', '+692'], ['MQ', '+596'],
-  ['MR', '+222'], ['MU', '+230'], ['YT', '+262'], ['MX', '+52'], ['FM', '+691'], ['MD', '+373'],
-  ['MC', '+377'], ['MN', '+976'], ['ME', '+382'], ['MS', '+1 664'], ['MA', '+212'], ['MZ', '+258'],
-  ['MM', '+95'], ['NA', '+264'], ['NR', '+674'], ['NP', '+977'], ['NL', '+31'], ['NC', '+687'],
-  ['NZ', '+64'], ['NI', '+505'], ['NE', '+227'], ['NG', '+234'], ['NU', '+683'], ['NF', '+672'],
-  ['KP', '+850'], ['MK', '+389'], ['MP', '+1 670'], ['NO', '+47'], ['OM', '+968'], ['PK', '+92'],
-  ['PW', '+680'], ['PS', '+970'], ['PA', '+507'], ['PG', '+675'], ['PY', '+595'], ['PE', '+51'],
-  ['PH', '+63'], ['PL', '+48'], ['PT', '+351'], ['PR', '+1 787'], ['PR', '+1 939'], ['QA', '+974'],
-  ['RE', '+262'], ['RO', '+40'], ['RU', '+7'], ['RW', '+250'], ['BL', '+590'], ['SH', '+290'],
-  ['KN', '+1 869'], ['LC', '+1 758'], ['MF', '+590'], ['PM', '+508'], ['VC', '+1 784'],
-  ['WS', '+685'], ['SM', '+378'], ['ST', '+239'], ['SA', '+966'], ['SN', '+221'], ['RS', '+381'],
-  ['SC', '+248'], ['SL', '+232'], ['SG', '+65'], ['SX', '+1 721'], ['SK', '+421'], ['SI', '+386'],
-  ['SB', '+677'], ['SO', '+258'], ['ZA', '+27'], ['KR', '+82'], ['SS', '+211'], ['ES', '+34'],
-  ['LK', '+94'], ['SD', '+249'], ['SR', '+597'], ['SE', '+46'], ['CH', '+41'], ['SY', '+963'],
-  ['TW', '+886'], ['TJ', '+992'], ['TZ', '+255'], ['TH', '+66'], ['TL', '+670'], ['TG', '+228'],
-  ['TK', '+690'], ['TO', '+676'], ['TT', '+1 868'], ['TN', '+216'], ['TR', '+90'], ['TM', '+993'],
-  ['TC', '+1 649'], ['TV', '+688'], ['UG', '+256'], ['UA', '+380'], ['AE', '+971'], ['GB', '+44'],
-  ['US', '+1'], ['UY', '+598'], ['UZ', '+998'], ['VU', '+678'], ['VA', '+39 06 698'], ['VE', '+58'],
-  ['VN', '+84'], ['VI', '+1 340'], ['WF', '+681'], ['EH', '+212'], ['YE', '+967'], ['ZM', '+260'],
-  ['ZW', '+263'], ['AX', '+358 18'],
-]
-
 export default function Contact() {
   const [sent, setSent] = useState(false)
+  const [phone, setPhone] = useState()
   const { language } = useLanguage()
   const isIndonesian = language === 'id'
   const isChinese = language === 'zh'
-  const countryNames = new Intl.DisplayNames([isIndonesian ? 'id' : isChinese ? 'zh' : 'en'], { type: 'region' })
 
   const t = {
     name: isIndonesian ? 'Nama lengkap' : isChinese ? '姓名' : 'Full name',
@@ -78,7 +37,6 @@ export default function Contact() {
     address: 'Jl. Tamblong No.46, Kb. Pisang, Kec. Sumur Bandung, Bandung, Jawa Barat 40112',
     hours: isIndonesian ? 'Senin – Jumat' : isChinese ? '周一 – 周五' : 'Monday – Friday',
     map: isIndonesian ? 'Lihat di Google Maps' : isChinese ? '查看 Google 地图' : 'View on Google Maps',
-    countryCode: isIndonesian ? 'Kode negara' : isChinese ? '国家区号' : 'Country calling code',
   }
 
   function handleSubmit(event) {
@@ -86,7 +44,7 @@ export default function Contact() {
     const form = new FormData(event.currentTarget)
     const subject = encodeURIComponent(`Inquiry — ${form.get('inquiry') || 'Event'}`)
     const body = encodeURIComponent(
-      `Nama: ${form.get('name')}\nEmail: ${form.get('email')}\nTelepon: ${form.get('countryCode')} ${form.get('phone')}\n\n${form.get('message')}`
+      `Nama: ${form.get('name')}\nEmail: ${form.get('email')}\nTelepon: ${phone || ''}\n\n${form.get('message')}`
     )
     window.location.href = `mailto:hello@bmg.co.id?subject=${subject}&body=${body}`
     setSent(true)
@@ -154,7 +112,7 @@ export default function Contact() {
       />
 
       <section className="section">
-        <Wrap className="grid gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16">
+        <Wrap className="grid gap-6 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16">
           {/* Form ------------------------------------------------------- */}
           <form className="card p-7 md:p-9" onSubmit={handleSubmit}>
             <h2 className="h3 text-[22px]">{isIndonesian ? 'Kirim pesan' : isChinese ? '留言给我们' : 'Send us a message'}</h2>
@@ -168,7 +126,7 @@ export default function Contact() {
 
             <div className="mt-7">
               <label className="label" htmlFor="contact-name">
-                {t.name} <span className="text-brand-600" aria-hidden="true">*</span>
+                {t.name} <span className="font-bold text-red-600" aria-hidden="true">*</span>
               </label>
               <div className="input-wrap">
                 <User size={17} aria-hidden="true" />
@@ -186,7 +144,7 @@ export default function Contact() {
 
             <div className="mt-5">
               <label className="label" htmlFor="contact-email">
-                {t.email} <span className="text-brand-600" aria-hidden="true">*</span>
+                {t.email} <span className="font-bold text-red-600" aria-hidden="true">*</span>
               </label>
               <div className="input-wrap">
                 <Mail size={17} aria-hidden="true" />
@@ -206,32 +164,24 @@ export default function Contact() {
             <div className="mt-5 grid gap-5 sm:grid-cols-2">
               <div>
                 <label className="label" htmlFor="contact-phone">
-                  {t.phone} <span className="text-brand-600" aria-hidden="true">*</span>
+                  {t.phone} <span className="font-bold text-red-600" aria-hidden="true">*</span>
                 </label>
-                <div className="input-wrap">
-                  <select
-                    className="w-[46%] min-w-0 shrink-0 cursor-pointer border-0 bg-transparent text-[14px] text-ink-900 outline-0"
-                    aria-label={t.countryCode}
-                    name="countryCode"
-                    defaultValue="+62"
-                  >
-                    {countryCallingCodes.map(([countryCode, callingCode], index) => (
-                      <option key={`${countryCode}-${callingCode}-${index}`} value={callingCode}>
-                        {countryNames.of(countryCode)} ({callingCode})
-                      </option>
-                    ))}
-                  </select>
-                  <input
-                    className="input min-w-0 flex-1 border-l border-line pl-3"
-                    id="contact-phone"
-                    name="phone"
-                    type="tel"
-                    autoComplete="tel-national"
-                    inputMode="tel"
-                    placeholder="812 3456 7890"
-                    required
-                  />
-                </div>
+                <PhoneInput
+                  className="input-wrap"
+                  flags={flags}
+                  defaultCountry="ID"
+                  international
+                  countryCallingCodeEditable={false}
+                  value={phone}
+                  onChange={setPhone}
+                  required
+                  autoComplete="tel"
+                  numberInputProps={{
+                    id: 'contact-phone',
+                    className: 'input',
+                    placeholder: '812 3456 7890',
+                  }}
+                />
               </div>
 
               <div>
@@ -243,11 +193,8 @@ export default function Contact() {
                     className="w-full cursor-pointer appearance-none border-0 bg-transparent pr-6 text-[14px] text-ink-900 outline-0"
                     id="contact-inquiry"
                     name="inquiry"
-                    defaultValue=""
+                    defaultValue="Event Planning"
                   >
-                    <option value="" disabled>
-                      {isIndonesian ? 'Pilih kebutuhan Anda' : isChinese ? '请选择您的需求' : 'Select your needs'}
-                    </option>
                     <option>Event Planning</option>
                     <option>Event Production</option>
                     <option>Brand Activation</option>
@@ -261,7 +208,7 @@ export default function Contact() {
 
             <div className="mt-5">
               <label className="label" htmlFor="contact-message">
-                {t.message} <span className="text-brand-600" aria-hidden="true">*</span>
+                {t.message} <span className="font-bold text-red-600" aria-hidden="true">*</span>
               </label>
               <div className="input-wrap items-start">
                 <MessageSquare size={17} className="mt-3 shrink-0" aria-hidden="true" />
@@ -281,11 +228,7 @@ export default function Contact() {
               </div>
             </div>
 
-            <div className="mt-7 flex flex-wrap items-center gap-4">
-              <button className="btn btn--primary" type="submit">
-                {t.submit}
-                <span className="btn__icon" aria-hidden="true">→</span>
-              </button>
+            <div className="mt-7 flex flex-wrap items-center justify-between gap-4">
               <p className="flex items-center gap-2 text-[13px] text-muted" role="status" aria-live="polite">
                 {sent ? (
                   <span className="text-success-600">{t.sent}</span>
@@ -296,6 +239,10 @@ export default function Contact() {
                   </>
                 )}
               </p>
+              <button className="btn btn--primary" type="submit">
+                {t.submit}
+                <span className="btn__icon" aria-hidden="true">→</span>
+              </button>
             </div>
           </form>
 
@@ -312,7 +259,7 @@ export default function Contact() {
                   : 'You can also reach us using the contact details below.'}
             </p>
 
-            <ul className="mt-8 grid gap-5">
+            <ul className="mt-4 md:mt-8 grid gap-4 md:gap-5">
               {details.map((detail) => (
                 <li className="flex items-start gap-4" key={detail.label}>
                   <span className="grid h-11 w-11 flex-none place-items-center rounded-[12px] bg-ink-900 text-white">
@@ -336,7 +283,7 @@ export default function Contact() {
             </ul>
 
             <a
-              className="group relative mt-8 block h-[180px] overflow-hidden rounded-[20px] bg-ink-800"
+              className="group relative mt-4 md:mt-8 block h-[180px] overflow-hidden rounded-[20px] bg-ink-800"
               href="https://maps.google.com/?q=Jl.+Tamblong+No.46,+Bandung"
               target="_blank"
               rel="noreferrer"

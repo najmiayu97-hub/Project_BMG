@@ -50,7 +50,7 @@ export default function EventDetail() {
       {/* Overview + scope ---------------------------------------------- */}
       <section className="section">
         <Wrap>
-          <div className="grid items-center gap-10 lg:grid-cols-12 lg:gap-14">
+          <div className="grid items-center gap-6 lg:grid-cols-12 lg:gap-14">
             <div className="lg:col-span-5">
               <div className="overflow-hidden rounded-[20px] shadow-lg">
                 <img
@@ -78,7 +78,7 @@ export default function EventDetail() {
               <Eyebrow>{labels.overview}</Eyebrow>
               <h2 className="h2 mt-4">{title}</h2>
               <p className="lead mt-5">{t(event.overview)}</p>
-              <h3 className="h3 mt-8">{labels.scope}</h3>
+              <h3 className="h3 mt-4 md:mt-8">{labels.scope}</h3>
               <ul className="mt-4 space-y-3">
                 {t(event.scope).map((item) => (
                   <li key={item} className="flex items-start gap-3">
@@ -91,7 +91,7 @@ export default function EventDetail() {
               </ul>
               <Link
                 to="/event"
-                className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-brand-600 transition-colors hover:text-brand-700"
+                className="mt-4 md:mt-8 inline-flex items-center gap-2 text-sm font-semibold text-brand-600 transition-colors hover:text-brand-700"
               >
                 <ArrowLeft size={16} aria-hidden="true" />
                 {labels.allEvents}

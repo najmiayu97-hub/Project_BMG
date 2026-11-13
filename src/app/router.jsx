@@ -11,6 +11,9 @@ import Compare from '../pages/Compare.jsx'
 import NotFound from '../pages/NotFound.jsx'
 import OurTeam from '../pages/OurTeam.jsx'
 import PrivacyPolicy from '../pages/PrivacyPolicy.jsx'
+import TermsCondition from '../pages/TermsCondition.jsx'
+import Help from '../pages/Help.jsx'
+import FAQ from '../pages/FAQ.jsx'
 
 // BASE_URL is '/' locally and e.g. '/bmg/' on GitHub Pages; React Router
 // expects a basename without a trailing slash.
@@ -31,6 +34,9 @@ export const router = createBrowserRouter([
       { path: 'portfolio', element: <Navigate to="/event" replace /> },
       { path: 'contact', element: <Contact /> },
       { path: 'privacy', element: <PrivacyPolicy /> },
+      { path: 'terms', element: <TermsCondition /> },
+      { path: 'help', element: <Help /> },
+      { path: 'faq', element: <FAQ /> },
       { path: 'bandingkan', element: <Compare /> },
       { path: '*', element: <NotFound /> },
     ],

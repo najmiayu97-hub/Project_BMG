@@ -91,7 +91,7 @@ export default function Event() {
         <Wrap>
           {/* Filters -------------------------------------------------- */}
           <div
-            className="mb-8 flex gap-2 overflow-x-auto border-b border-line pb-px [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+            className="mb-4 md:mb-8 flex gap-2 overflow-x-auto border-b border-line pb-px [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
             role="group"
             aria-label={isIndonesian ? 'Filter kategori event' : isChinese ? '活动分类筛选' : 'Filter event categories'}
           >

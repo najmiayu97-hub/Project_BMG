@@ -49,7 +49,7 @@ export default function ServiceDetail() {
       {/* Overview + deliverables -------------------------------------- */}
       <section className="section">
         <Wrap>
-          <div className="grid items-center gap-10 lg:grid-cols-12 lg:gap-14">
+          <div className="grid items-center gap-6 lg:grid-cols-12 lg:gap-14">
             <div className="lg:col-span-5">
               <div className="relative overflow-hidden rounded-[20px] shadow-lg">
                 <img
@@ -66,7 +66,7 @@ export default function ServiceDetail() {
               <Eyebrow>{labels.overview}</Eyebrow>
               <h2 className="h2 mt-4">{title}</h2>
               <p className="lead mt-5">{t(service.overview)}</p>
-              <h3 className="h3 mt-8">{labels.included}</h3>
+              <h3 className="h3 mt-4 md:mt-8">{labels.included}</h3>
               <ul className="mt-4 space-y-3">
                 {t(service.deliverables).map((item) => (
                   <li key={item} className="flex items-start gap-3">
@@ -79,7 +79,7 @@ export default function ServiceDetail() {
               </ul>
               <Link
                 to="/services"
-                className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-brand-600 transition-colors hover:text-brand-700"
+                className="mt-4 md:mt-8 inline-flex items-center gap-2 text-sm font-semibold text-brand-600 transition-colors hover:text-brand-700"
               >
                 <ArrowLeft size={16} aria-hidden="true" />
                 {labels.allServices}

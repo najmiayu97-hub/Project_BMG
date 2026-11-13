@@ -55,7 +55,7 @@ export default function NotFound() {
           </ButtonLink>
         </div>
 
-        <nav className="mt-10" aria-label={isIndonesian ? 'Tautan cepat' : isChinese ? '快捷链接' : 'Quick links'}>
+        <nav className="mt-6 md:mt-10" aria-label={isIndonesian ? 'Tautan cepat' : isChinese ? '快捷链接' : 'Quick links'}>
           <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-white/50">{t.quickLinks}</p>
           <ul className="mt-3 flex flex-wrap gap-x-6 gap-y-2">
             {links.map((link) => (

@@ -48,7 +48,7 @@ export default function Compare() {
         <p className="lead mt-3 max-w-[560px]">{subheading}</p>
 
         {/* Controls */}
-        <div className="mt-8 flex flex-wrap items-center gap-4">
+        <div className="mt-6 md:mt-8 flex flex-wrap items-center gap-4">
           <div className="flex flex-wrap gap-2" role="group" aria-label={isIndonesian ? 'Pilih halaman' : isChinese ? '选择页面' : 'Choose page'}>
             {pages.map((p) => (
               <button

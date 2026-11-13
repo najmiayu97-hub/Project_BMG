@@ -227,7 +227,7 @@ export default function PrivacyPolicy() {
       <section className="section section--white">
         <Wrap className="max-w-3xl">
           {sections.map((section) => (
-            <section className="mt-10 first:mt-0" key={section.title.id} aria-labelledby={`privacy-${section.title.id.split('.')[0]}`}>
+            <section className="mt-6 md:mt-10 first:mt-0" key={section.title.id} aria-labelledby={`privacy-${section.title.id.split('.')[0]}`}>
               <h2 className="h3" id={`privacy-${section.title.id.split('.')[0]}`}>{section.title[language]}</h2>
               {section.paragraphs[language].map((paragraph, index) => (
                 <p className="mt-3 text-[15px] leading-relaxed text-muted" key={index}>

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { Calendar, Diamond, Eye, Handshake, Star, Target, Users } from 'lucide-react'
+import { Calendar, Handshake, Star, Users } from 'lucide-react'
 import AnimatedCounter from '../components/AnimatedCounter.jsx'
 import { ButtonLink, PageHero, SectionHead, Wrap } from '../components/ui.jsx'
 import { useLanguage } from '../i18n/language.js'
@@ -20,23 +20,23 @@ export default function AboutUs() {
     { Icon: Users, end: 100, suffix: 'K+', label: isIndonesian ? 'Audiens terjangkau' : isChinese ? '覆盖受众超 10 万' : 'Audience reached' },
   ]
 
-  const values = isIndonesian
-    ? [
-        { Icon: Target, title: 'Misi Kami', text: 'Memberikan solusi event yang inovatif, terintegrasi, dan berdampak melalui perencanaan matang, eksekusi profesional, serta komunikasi yang efektif.' },
-        { Icon: Eye, title: 'Visi Kami', text: 'Menjadi event organizer terpercaya dan berpengaruh untuk menciptakan pengalaman berkesan dan memberikan nilai lebih bagi klien dan audiens.' },
-        { Icon: Diamond, title: 'Nilai Kami', text: 'Kreativitas, Integritas, Kolaborasi, Keunggulan, dan berorientasi hasil — lima nilai yang kami pegang di setiap proyek.' },
-      ]
+  const visionText = isIndonesian
+    ? 'Menjadi event organizer terpercaya dan berpengaruh untuk menciptakan pengalaman berkesan dan memberikan nilai lebih bagi klien dan audiens.'
     : isChinese
-      ? [
-          { Icon: Target, title: '我们的使命', text: '提供创新、整合且具影响力的活动解决方案，确保每个环节都兼顾策划、执行与传播效果。' },
-          { Icon: Eye, title: '我们的愿景', text: '成为值得信赖且具有影响力的活动策划伙伴，持续打造让人难忘并为客户与受众创造价值的活动体验。' },
-          { Icon: Diamond, title: '我们的价值观', text: '创意、诚信、协作、卓越与成果导向 — 这是我们在每个项目中都始终坚持的五项价值。' },
-        ]
-      : [
-          { Icon: Target, title: 'Our Mission', text: 'To deliver innovative, integrated, and impactful event solutions through thoughtful planning, professional execution, and effective communication.' },
-          { Icon: Eye, title: 'Our Vision', text: 'To become a trusted and influential event organizer, creating memorable experiences and greater value for clients and audiences.' },
-          { Icon: Diamond, title: 'Our Values', text: 'Creativity, integrity, collaboration, excellence, and result-driven — five values we hold in every project we run.' },
-        ]
+      ? '成为值得信赖且具有影响力的活动策划伙伴，持续打造让人难忘并为客户与受众创造价值的活动体验。'
+      : 'To become a trusted and influential event organizer, creating memorable experiences and greater value for clients and audiences.'
+
+  const missionItems = isIndonesian
+    ? ['Memberikan solusi event yang inovatif', 'Terintegrasi dari perencanaan hingga eksekusi', 'Berdampak melalui komunikasi yang efektif']
+    : isChinese
+      ? ['提供创新的活动解决方案', '从策划到执行全程整合', '通过有效沟通创造实际影响']
+      : ['Deliver innovative event solutions', 'Integrate planning through execution', 'Create impact through effective communication']
+
+  const valuesText = isIndonesian
+    ? 'Kreativitas\nIntegritas\nKolaborasi\nKeunggulan\nBerorientasi Hasil'
+    : isChinese
+      ? '创意\n诚信\n协作\n卓越\n成果导向'
+      : 'Creativity\nIntegrity\nCollaboration\nExcellence\nResult Driven'
 
   return (
     <>
@@ -76,7 +76,7 @@ export default function AboutUs() {
 
       {/* Who we are --------------------------------------------------- */}
       <section className="section section--white">
-        <Wrap className="grid items-start gap-12 lg:grid-cols-2 lg:gap-20">
+        <Wrap className="grid items-start gap-6 lg:grid-cols-2 lg:gap-20">
           <div>
             <SectionHead
               eyebrow={isIndonesian ? 'Siapa Kami' : isChinese ? '我们是谁' : 'Who We Are'}
@@ -130,8 +130,8 @@ export default function AboutUs() {
       </section>
 
       {/* Team ---------------------------------------------------------- */}
-      <section className="section">
-        <Wrap className="grid items-start gap-12 lg:grid-cols-2 lg:gap-20">
+      <section className="section pt-6">
+        <Wrap className="grid items-start gap-6 lg:grid-cols-2 lg:gap-20">
           <div className="media-frame aspect-[4/3] lg:order-1">
             <img
               src={teamPhoto}
@@ -164,8 +164,9 @@ export default function AboutUs() {
                     ? '我们拥有丰富经验和高度责任心的专业团队，确保每一个细节都被精心把控，活动顺利落地。'
                     : 'A professional team with deep experience and dedication, ready to make sure every detail of your event runs perfectly.'
               }
+              className="mb-4"
             />
-            <ButtonLink to="/about-us/our-team" variant="primary" className="mt-8">
+            <ButtonLink to="/about-us/our-team" variant="primary" className="mt-4">
               {isIndonesian ? 'Kenali tim kami' : isChinese ? '认识我们的团队' : 'Meet the team'}
               <span className="btn__icon" aria-hidden="true">→</span>
             </ButtonLink>
@@ -173,11 +174,11 @@ export default function AboutUs() {
         </Wrap>
       </section>
 
-      {/* Values -------------------------------------------------------- */}
+      {/* Vision, Mission & Values ------------------------------------ */}
       <section className="section section--white">
         <Wrap>
           <SectionHead
-            eyebrow={isIndonesian ? 'Nilai-Nilai Kami' : isChinese ? '我们的价值观' : 'Our Values'}
+            eyebrow={isIndonesian ? 'Visi, Misi & Nilai' : isChinese ? '愿景、使命与价值观' : 'Vision, Mission & Values'}
             title={
               isIndonesian ? (
                 <>
@@ -194,16 +195,29 @@ export default function AboutUs() {
               )
             }
           />
-          <div className="grid gap-5 md:grid-cols-3">
-            {values.map((value) => (
-              <article className="card p-8" key={value.title}>
-                <div className="icon-badge">
-                  <value.Icon size={22} />
-                </div>
-                <h3 className="h3 mt-6">{value.title}</h3>
-                <p className="mt-3 text-[15px] leading-relaxed text-muted">{value.text}</p>
-              </article>
-            ))}
+          <div className="grid gap-6 md:gap-10">
+            <div>
+              <p className="text-xs font-bold uppercase tracking-[0.14em] text-brand-600">
+                {isIndonesian ? 'Visi Kami' : isChinese ? '我们的愿景' : 'Our Vision'}
+              </p>
+              <p className="mt-3 max-w-3xl text-[15px] leading-relaxed text-muted">{visionText}</p>
+            </div>
+            <div>
+              <p className="text-xs font-bold uppercase tracking-[0.14em] text-brand-600">
+                {isIndonesian ? 'Misi Kami' : isChinese ? '我们的使命' : 'Our Mission'}
+              </p>
+              <ul className="mt-3 list-disc space-y-2 pl-6 text-[15px] leading-relaxed text-muted">
+                {missionItems.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </div>
+            <div className="card p-5 md:p-8">
+              <p className="text-xs font-bold uppercase tracking-[0.14em] text-brand-600">
+                {isIndonesian ? 'Nilai Kami' : isChinese ? '我们的价值观' : 'Our Values'}
+              </p>
+              <p className="mt-3 whitespace-pre-line text-[15px] leading-relaxed text-muted">{valuesText}</p>
+            </div>
           </div>
         </Wrap>
       </section>
