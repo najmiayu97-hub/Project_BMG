@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { Calendar, Handshake, Star, Users } from 'lucide-react'
 import AnimatedCounter from '../components/AnimatedCounter.jsx'
-import { ButtonLink, PageHero, SectionHead, Wrap } from '../components/ui.jsx'
+import { ButtonLink, Eyebrow, PageHero, SectionHead, Wrap } from '../components/ui.jsx'
 import { useLanguage } from '../i18n/language.js'
 
 const activityPhoto = 'https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=1200&q=88'
@@ -221,6 +221,46 @@ export default function AboutUs() {
           </div>
         </Wrap>
       </section>
+
+       {/* CTA ---------------------------------------------------------- */}
+       <section className="relative isolate text-white py-[62px] max-[680px]:py-[42px]" style={{ '--hero-image': `url(${activityPhoto})` }}>
+         <div className="absolute inset-0 z-0 bg-[linear-gradient(90deg,rgba(7,14,28,.83),rgba(7,14,28,.72)),var(--hero-image)] bg-center bg-cover" />
+         <Wrap className="relative z-[1]">
+           <div className="max-w-3xl" data-enter>
+             <Eyebrow dark accent>
+               {isIndonesian ? 'Layanan Kami' : isChinese ? '我们的服务' : 'Our Services'}
+             </Eyebrow>
+             <h2 className="h2 mt-5">
+               {isIndonesian ? (
+                 <>
+                   Butuh solusi event? <span className="text-accent-400">Kami siap membantu.</span>
+                 </>
+               ) : isChinese ? (
+                 <>
+                   需要活动解决方案？<span className="text-accent-400">我们随时为您服务。</span>
+                 </>
+               ) : (
+                 <>
+                   Need an event solution? <span className="text-accent-400">We're ready to help.</span>
+                 </>
+               )}
+             </h2>
+             <p className="lead lead--onDark mt-5 max-w-[560px]">
+               {isIndonesian
+                 ? 'Jelajahi layanan kami dan temukan solusi terbaik untuk event Anda.'
+                 : isChinese
+                   ? '探索我们的服务，为您的活动找到最佳解决方案。'
+                   : 'Explore our services and find the best solution for your event.'}
+             </p>
+             <div className="hero__actions">
+               <ButtonLink to="/services" variant="accent">
+                 {isIndonesian ? 'Lihat Layanan' : isChinese ? '查看服务' : 'View Services'}
+                 <span className="btn__icon" aria-hidden="true">→</span>
+               </ButtonLink>
+             </div>
+           </div>
+         </Wrap>
+       </section>
     </>
   )
 }

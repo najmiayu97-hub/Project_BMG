@@ -678,8 +678,8 @@ export default function HomePage() {
                   : 'Talk to our professional team about what you need.'}
             </p>
             <div className="hero__actions">
-              <ButtonLink to="/contact" variant="accent">
-                {isIndonesian ? 'Hubungi Kami' : isChinese ? '联系我们' : 'Contact Us'}
+              <ButtonLink to="/about-us" variant="accent">
+                {isIndonesian ? 'Kenali Kami lebih jauh' : isChinese ? '了解更多关于我们' : 'Get to know us better'}
                 <span className="btn__icon" aria-hidden="true">→</span>
               </ButtonLink>
             </div>
