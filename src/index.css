@@ -863,6 +863,11 @@
     display: grid;
     gap: 14px;
     padding: 20px var(--gutter) 26px;
+    position: sticky;
+    bottom: 0;
+    background: rgba(11, 18, 32, 0.85);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
   }
 
   @media (min-width: 900px) {

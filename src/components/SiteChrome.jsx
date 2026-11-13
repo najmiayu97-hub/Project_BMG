@@ -102,7 +102,6 @@ export function SiteHeader() {
           ))}
         </nav>
         <div className="mobile-menu__footer">
-          <LanguageSwitcher />
           <ButtonLink to="/contact" variant="accent" block onClick={() => setOpen(false)}>
             {labels.contact}
           </ButtonLink>
